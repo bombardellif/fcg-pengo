@@ -1,30 +1,27 @@
 #ifndef SCENARIO_H
 #define SCENARIO_H
 
-#include <string>
-#include <vector>
-#include <list>
-#include <iostream>
-#include <assert.h>
-
 #include "Modelable.h"
+
+#define SCENARIO_MAP_SIZE 15
 
 class Scenario
 {
+private:
+    float backgrundColor[4];
+    
 public:
-	Modelable map[15][15];
+	Modelable* map[SCENARIO_MAP_SIZE][SCENARIO_MAP_SIZE];
 
 	int cameraState;
 
-
-public:
-	void Cenario();
+	Scenario();
 
 	void render();
 
 	void init();
 
-	void updateWindow();
+	void updateWindow(int windowWidth, int windowHeight);
 
 };
 #endif

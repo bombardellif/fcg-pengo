@@ -4,6 +4,12 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>include/3DObject.h</itemPath>
+      <itemPath>include/Modelable.h</itemPath>
+      <itemPath>include/Scenario.h</itemPath>
+      <itemPath>include/Texture.h</itemPath>
+      <itemPath>include/bitmap.h</itemPath>
+      <itemPath>include/glm.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -12,6 +18,13 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>src/3DObject.cpp</itemPath>
+      <itemPath>src/Modelable.cpp</itemPath>
+      <itemPath>src/Scenario.cpp</itemPath>
+      <itemPath>src/Texture.cpp</itemPath>
+      <itemPath>src/bitmap.c</itemPath>
+      <itemPath>src/glm.cpp</itemPath>
+      <itemPath>src/glmimg.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -39,7 +52,13 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <cTool>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+        </cTool>
         <ccTool>
+          <standard>4</standard>
           <incDir>
             <pElem>include</pElem>
           </incDir>
@@ -49,7 +68,33 @@
           <commandLine>-lGL -lglut -lGLU</commandLine>
         </linkerTool>
       </compileType>
+      <item path="include/3DObject.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Modelable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Scenario.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Texture.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/bitmap.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/glm.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/3DObject.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Modelable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Scenario.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Texture.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/bitmap.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/glm.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/glmimg.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -72,7 +117,33 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="include/3DObject.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Modelable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Scenario.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Texture.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/bitmap.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/glm.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/3DObject.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Modelable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Scenario.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Texture.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/bitmap.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/glm.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/glmimg.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

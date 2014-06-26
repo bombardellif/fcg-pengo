@@ -16,6 +16,7 @@
 #include <GL/glut.h>
 #include "bitmap.h"
 #include "3DObject.h"
+#include "Scenario.h"
 
 #define APP_NAME "FCG - Pengo"
 #define SLEEP_MS 30
@@ -27,15 +28,20 @@ using namespace std;
 /**
  * Screen dimensions
 */
-int windowWidth = 600;
-int windowHeight = 480;
+static int windowWidth = 600;
+static int windowHeight = 480;
 /**
  * Screen position
 */
-int windowXPos = 100;
-int windowYPos = 150;
+static int windowXPos = 100;
+static int windowYPos = 150;
 
-int mainWindowId = 0;
+static int mainWindowId = 0;
+
+/**
+ * Global objects of game control
+ */
+Scenario scenario;
 
 /* END of Global Variables*/
 
@@ -46,7 +52,7 @@ void onWindowReshape(int x, int y) {
 	windowWidth = x;
 	windowHeight = y;
     
-	// Scenario.getInstance().updateWindow();
+	scenario.updateWindow(windowWidth, windowWidth);
     
     glViewport(0, 0, windowWidth, windowHeight);
 }
@@ -78,9 +84,11 @@ void onKeyUp(unsigned char key, int x, int y) {
 */
 void mainRender() {
 	// GameController.getInstance().update();
-	// Scenario.getInstance().render();
+	scenario.render();
+    
 	glFlush();
 	glutPostRedisplay();
+    
 	#  ifdef WIN32
         Sleep(SLEEP_MS);
     #  else
@@ -93,10 +101,10 @@ Initialize
 */
 void mainInit() {
     
-    // Scenario.getInstance().updateWindow();
+    scenario.updateWindow(windowWidth, windowWidth);
     glViewport(0, 0, windowWidth, windowHeight);
     
-    // Scenario.getInstance().initialize();
+    scenario.init();
 }
 
 /*
