@@ -17,6 +17,10 @@
 #    include <wingdi.h>
 #  endif /* WIN32 */
 
+#define SMOOTH 0
+#define SMOOTH_MATERIAL 1
+#define SMOOTH_MATERIAL_TEXTURE 2
+
 /*
  * Make this header file work with C and C++ source code...
  */

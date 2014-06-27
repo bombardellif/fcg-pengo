@@ -41,7 +41,7 @@ static int mainWindowId = 0;
 /**
  * Global objects of game control
  */
-Scenario scenario;
+Scenario scenario("res/");
 
 /* END of Global Variables*/
 
