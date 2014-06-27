@@ -6,7 +6,7 @@
 #include "LinearMovement.h"
 #include "AngularMovement.h"
 
-GameController::GameController(): penguinSpeed(DEFAULT_PENGUIN_SPEED), maxConceivingBlocks(DEFAULT_MAX_CONCEIVING_BLOCKS)
+GameController::GameController(Penguin& penguin): penguin(penguin), penguinSpeed(DEFAULT_PENGUIN_SPEED), maxConceivingBlocks(DEFAULT_MAX_CONCEIVING_BLOCKS)
 {
 }
 

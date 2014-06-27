@@ -20,7 +20,7 @@ private:
 
 	std::list<Movement*> normalMovements;
 
-	Penguin penguin;
+	Penguin& penguin;
 
 	std::list<Enemy> enemies;
 
@@ -29,6 +29,8 @@ private:
         int maxConceivingBlocks;
 
 public:
+        GameController(Penguin& penguin);
+
 	bool upPressed;
 
 	bool downPressed;
