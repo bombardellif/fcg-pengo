@@ -1,43 +1,36 @@
 #ifndef GAME_CONTROLLER_H
 #define GAME_CONTROLLER_H
 
-#include <string>
-#include <vector>
-#include <list>
-#include <iostream>
-#include <assert.h>
-
 #include "LinearMovement.h"
 #include "Penguin.h"
 #include "Enemy.h"
-#include "java/util/List.h"
+
+#define MAX_BLOCKING_MOVEMENTS 10
+#define MAX_NORMAL_MOVEMENTS 50
+#define MAX_ENEMIES 10
 
 class GameController
 {
 private:
-	static GameController instance;
+	LinearMovement blockingMovements[MAX_BLOCKING_MOVEMENTS];
 
-	java::util::List<LinearMovement> blockingMovements;
-
-	java::util::List<LinearMovement> normalMovements;
+	LinearMovement normalMovements[MAX_NORMAL_MOVEMENTS];
 
 	Penguin penguin;
 
-	java::util::List<Enemy> enemies;
+	Enemy enemies[MAX_ENEMIES];
 
 public:
-	boolean upPressed;
+	bool upPressed;
 
-	boolean downPressed;
+	bool downPressed;
 
-	boolean rightPressed;
+	bool rightPressed;
 
-	boolean leftPressed;
+	bool leftPressed;
 
 
 public:
-	static GameController getInstance();
-
 	void update();
 
 };

@@ -5,7 +5,18 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>include/3DObject.h</itemPath>
+      <itemPath>include/AngularMovement.h</itemPath>
+      <itemPath>include/Block.h</itemPath>
+      <itemPath>include/Conception.h</itemPath>
+      <itemPath>include/Enemy.h</itemPath>
+      <itemPath>include/EnemyInteligence.h</itemPath>
+      <itemPath>include/GameController.h</itemPath>
+      <itemPath>include/Item.h</itemPath>
+      <itemPath>include/LinearMovement.h</itemPath>
       <itemPath>include/Modelable.h</itemPath>
+      <itemPath>include/Movable.h</itemPath>
+      <itemPath>include/Movement.h</itemPath>
+      <itemPath>include/Penguin.h</itemPath>
       <itemPath>include/Scenario.h</itemPath>
       <itemPath>include/Texture.h</itemPath>
       <itemPath>include/bitmap.h</itemPath>
@@ -19,7 +30,18 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>src/3DObject.cpp</itemPath>
+      <itemPath>src/AngularMovement.cpp</itemPath>
+      <itemPath>src/Block.cpp</itemPath>
+      <itemPath>src/Conception.cpp</itemPath>
+      <itemPath>src/Enemy.cpp</itemPath>
+      <itemPath>src/EnemyInteligence.cpp</itemPath>
+      <itemPath>src/GameController.cpp</itemPath>
+      <itemPath>src/Item.cpp</itemPath>
+      <itemPath>src/LinearMovement.cpp</itemPath>
       <itemPath>src/Modelable.cpp</itemPath>
+      <itemPath>src/Movable.cpp</itemPath>
+      <itemPath>src/Movement.cpp</itemPath>
+      <itemPath>src/Penguin.cpp</itemPath>
       <itemPath>src/Scenario.cpp</itemPath>
       <itemPath>src/Texture.cpp</itemPath>
       <itemPath>src/bitmap.c</itemPath>
@@ -70,7 +92,29 @@
       </compileType>
       <item path="include/3DObject.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/AngularMovement.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Block.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Conception.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Enemy.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/EnemyInteligence.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/GameController.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Item.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/LinearMovement.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Modelable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Movable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Movement.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Penguin.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Scenario.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -84,7 +128,29 @@
       </item>
       <item path="src/3DObject.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/AngularMovement.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Block.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Conception.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Enemy.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/EnemyInteligence.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/GameController.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Item.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/LinearMovement.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="src/Modelable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Movable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Movement.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Penguin.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Scenario.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -119,7 +185,29 @@
       </compileType>
       <item path="include/3DObject.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/AngularMovement.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Block.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Conception.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Enemy.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/EnemyInteligence.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/GameController.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Item.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/LinearMovement.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Modelable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Movable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Movement.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Penguin.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Scenario.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -133,7 +221,29 @@
       </item>
       <item path="src/3DObject.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/AngularMovement.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Block.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Conception.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Enemy.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/EnemyInteligence.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/GameController.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Item.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/LinearMovement.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="src/Modelable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Movable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Movement.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Penguin.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Scenario.cpp" ex="false" tool="1" flavor2="0">
       </item>

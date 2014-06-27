@@ -1,12 +1,6 @@
-#include <string>
-#include <vector>
-#include <list>
-#include <iostream>
-#include <assert.h>
-
 #include "LinearMovement.h"
 
 
-void LinearMovement::Movement(Movable object, pair destiny)
+LinearMovement::LinearMovement(const Movable& object, std::pair<double, double> destiny):Movement(object), destiny(destiny)
 {
 }

@@ -1,18 +1,12 @@
 #ifndef MOVABLE_H
 #define MOVABLE_H
 
-#include <string>
-#include <vector>
-#include <list>
-#include <iostream>
-#include <assert.h>
-
-#include "pair.h"
+#include <utility>
 
 class Movable
 {
 private:
-	pair position;
+	std::pair<double, double> position;
 
 };
 #endif

@@ -1,12 +1,6 @@
 #ifndef CONCEPTION_H
 #define CONCEPTION_H
 
-#include <string>
-#include <vector>
-#include <list>
-#include <iostream>
-#include <assert.h>
-
 #include "Block.h"
 
 class Conception
@@ -18,7 +12,7 @@ private:
 
 
 public:
-	void Conception(Block block, int numStep);
+	Conception(const Block& block, int numSteps);
 
 	void step();
 

@@ -1,14 +1,8 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
-#include <string>
-#include <vector>
-#include <list>
-#include <iostream>
-#include <assert.h>
-
 #include "Movable.h"
-#include "C3DObject.h"
+#include "3DObject.h"
 #include "Item.h"
 
 class Block : public Movable
@@ -19,11 +13,11 @@ private:
 public:
 	Item item;
 
-	boolean mobile;
+	bool mobile;
 
 
 public:
-	void Block(Item item, boolean mobile);
+	Block(Item item, bool mobile);
 
 	void conceive();
 

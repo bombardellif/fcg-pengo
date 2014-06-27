@@ -1,13 +1,7 @@
-#include <string>
-#include <vector>
-#include <list>
-#include <iostream>
-#include <assert.h>
-
 #include "Conception.h"
 
 
-void Conception::Conception(Block block, int numStep)
+Conception::Conception(const Block& block, int numSteps): block(block), numSteps(numSteps)
 {
 }
 

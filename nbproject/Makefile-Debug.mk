@@ -37,7 +37,18 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/src/3DObject.o \
+	${OBJECTDIR}/src/AngularMovement.o \
+	${OBJECTDIR}/src/Block.o \
+	${OBJECTDIR}/src/Conception.o \
+	${OBJECTDIR}/src/Enemy.o \
+	${OBJECTDIR}/src/EnemyInteligence.o \
+	${OBJECTDIR}/src/GameController.o \
+	${OBJECTDIR}/src/Item.o \
+	${OBJECTDIR}/src/LinearMovement.o \
 	${OBJECTDIR}/src/Modelable.o \
+	${OBJECTDIR}/src/Movable.o \
+	${OBJECTDIR}/src/Movement.o \
+	${OBJECTDIR}/src/Penguin.o \
 	${OBJECTDIR}/src/Scenario.o \
 	${OBJECTDIR}/src/Texture.o \
 	${OBJECTDIR}/src/bitmap.o \
@@ -79,10 +90,65 @@ ${OBJECTDIR}/src/3DObject.o: src/3DObject.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/3DObject.o src/3DObject.cpp
 
+${OBJECTDIR}/src/AngularMovement.o: src/AngularMovement.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/AngularMovement.o src/AngularMovement.cpp
+
+${OBJECTDIR}/src/Block.o: src/Block.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Block.o src/Block.cpp
+
+${OBJECTDIR}/src/Conception.o: src/Conception.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Conception.o src/Conception.cpp
+
+${OBJECTDIR}/src/Enemy.o: src/Enemy.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Enemy.o src/Enemy.cpp
+
+${OBJECTDIR}/src/EnemyInteligence.o: src/EnemyInteligence.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/EnemyInteligence.o src/EnemyInteligence.cpp
+
+${OBJECTDIR}/src/GameController.o: src/GameController.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/GameController.o src/GameController.cpp
+
+${OBJECTDIR}/src/Item.o: src/Item.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Item.o src/Item.cpp
+
+${OBJECTDIR}/src/LinearMovement.o: src/LinearMovement.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/LinearMovement.o src/LinearMovement.cpp
+
 ${OBJECTDIR}/src/Modelable.o: src/Modelable.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Modelable.o src/Modelable.cpp
+
+${OBJECTDIR}/src/Movable.o: src/Movable.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Movable.o src/Movable.cpp
+
+${OBJECTDIR}/src/Movement.o: src/Movement.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Movement.o src/Movement.cpp
+
+${OBJECTDIR}/src/Penguin.o: src/Penguin.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Penguin.o src/Penguin.cpp
 
 ${OBJECTDIR}/src/Scenario.o: src/Scenario.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

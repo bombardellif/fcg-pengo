@@ -1,24 +1,20 @@
 #ifndef MOVEMENT_H
 #define MOVEMENT_H
 
-#include <string>
-#include <vector>
-#include <list>
-#include <iostream>
-#include <assert.h>
-
 #include "Movable.h"
 
 class Movement
 {
-private:
+protected:
 	Movable object;
 
 
 public:
+        Movement(const Movable& object);
+
 	void move();
 
-	boolean isReady();
+	bool isReady();
 
 };
 #endif

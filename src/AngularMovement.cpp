@@ -1,12 +1,6 @@
-#include <string>
-#include <vector>
-#include <list>
-#include <iostream>
-#include <assert.h>
-
 #include "AngularMovement.h"
 
 
-void AngularMovement::AngularMovement(Movable object, double destiny, boolean clockWise)
+AngularMovement::AngularMovement(const Movable& object, double destiny, bool clockWise): Movement(object)
 {
 }

@@ -1,17 +1,14 @@
-#include <string>
-#include <vector>
-#include <list>
-#include <iostream>
-#include <assert.h>
-
 #include "Movement.h"
+
+Movement::Movement(const Movable& object){
+}
 
 
 void Movement::move()
 {
 }
 
-boolean Movement::isReady()
+bool Movement::isReady()
 {
-	return 0;
+	return true;
 }
