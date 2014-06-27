@@ -5,8 +5,14 @@
 
 class Modelable
 {
+private:
+    C3DObject* model;
 public:
-	virtual C3DObject getModel()=0;
+    Modelable(C3DObject* _model);
+    
+    virtual ~Modelable();
+    
+	virtual void draw();
 
 };
 #endif
