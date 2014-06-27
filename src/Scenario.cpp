@@ -4,47 +4,59 @@
 #include <string>
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <iostream>
 #include "bitmap.h"
 
 using namespace std;
 
 Scenario::Scenario(string _resourceFolder)
 : backgrundColor({0.0f,0.0f,0.0f,1.0f}),
-resourceFolder(_resourceFolder)
+resourceFolder(_resourceFolder),
+floorTexture(NULL),
+floorTextureId(0)
 {
 }
 
 void Scenario::initTexture()
-{
+{   
+    // Load the floor texture
+    this->floorTexture = LoadDIBitmap((this->resourceFolder + SCENARIO_TEXTURE_FLOOR_FILENAME).c_str(), &this->floorTextureInfo);
+    if (this->floorTexture == NULL) {
+        throw string("Error loading map file!");
+	}
     
+    // Create a texture object
+    glGenTextures(1, &floorTextureId);
 }
 
 void Scenario::initMap()
 {
-    BITMAPINFO *info;
+    GLubyte *bits;
+    BITMAPINFO *info = NULL;
     short row, col;
+    int bitIndex, i;
     C3DObject *obj;
     Modelable *mappedModel;
     GLuint pixel;
     
     // Load the 8x8 Bitmap that describes the map
-    GLubyte *bits = LoadDIBitmap((this->resourceFolder + SCENARIO_MAP_FILENAME).c_str(), &info);
-    if (bits == (GLubyte *)NULL) {
+    bits = LoadDIBitmap((this->resourceFolder + SCENARIO_MAP_FILENAME).c_str(), &info);
+    if (bits == NULL) {
 		throw string("Error loading map file!");
 	}
     
     // Create a RGBA image
-    if (info->bmiHeader.biWidth != 8 || info->bmiHeader.biHeight != 8) {
+    if (info->bmiHeader.biWidth != SCENARIO_MAP_SIZE || info->bmiHeader.biHeight != SCENARIO_MAP_SIZE) {
         throw string("Error loading map file: Invalid image size!");
     }
     
-    for(int i = info->bmiHeader.biWidth * info->bmiHeader.biHeight; i > 0 ; i--, bits += 3)
+    for(bitIndex=0, i = info->bmiHeader.biWidth * info->bmiHeader.biHeight; i > 0 ; i--, bitIndex += 3)
     {
-        row = i / 8;
-        col = i % 8;
+        row = i / SCENARIO_MAP_SIZE;
+        col = i % SCENARIO_MAP_SIZE;
         
         // interpret the RGB pixel (3 bytes) as an RGBA pixel (4 bytes)
-        pixel = ((GLuint)*bits) & 0x00ffffff;
+        pixel = ((GLuint)bits[bitIndex]) & 0x00ffffff;
         
         // TODO: instanciate the models according to the bitmap
         switch (pixel) {
@@ -64,6 +76,11 @@ void Scenario::initMap()
                 map[row][col] = NULL;
         }
     }
+    
+    // finally
+    free(bits);
+    if (info)
+        free(info);
 }
 
 void Scenario::initLight()
@@ -74,7 +91,7 @@ void Scenario::initLight()
 	GLfloat light_ambient[] = { backgrundColor[0], backgrundColor[1], backgrundColor[2], backgrundColor[3] };
 	GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
 	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat light_position1[] = {0.0, 1.0, 0.0, 0.0 };
+	GLfloat light_position1[] = {3.0, 3.0, 3.0, 0.0 };
 
     // Light 0
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
@@ -83,18 +100,84 @@ void Scenario::initLight()
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position1);
 }
 
+void Scenario::renderFloor()
+{
+    // Set the floor texture as current
+	glBindTexture(GL_TEXTURE_2D, this->floorTextureId);
+
+	// Set texture parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, 4, this->floorTextureInfo->bmiHeader.biWidth,
+        this->floorTextureInfo->bmiHeader.biHeight, 0, GL_RGB,
+        GL_UNSIGNED_BYTE, this->floorTexture);
+    
+    glShadeModel(GL_SMOOTH);
+	glEnable(GL_TEXTURE_2D);
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+    // Render the squares of the floor
+	glPushMatrix();
+
+    float planeSize = (float)SCENARIO_MAP_SIZE;
+    // TODO: adjust size
+    //glTranslatef(-(float)planeSize/2.0f, 0.0f, -(float)planeSize/2.0f);
+
+    glColor4f(1.0f,1.0f,1.0f,1.0f);
+    int xQuads = SCENARIO_MAP_SIZE * SCENARIO_MAP_SIZE;
+    for (int i = 0; i < xQuads; i++) {
+        for (int j = 0; j < xQuads; j++) {
+            glBegin(GL_QUADS);
+                glTexCoord2f(1.0f, 0.0f);   // coords for the texture
+                glNormal3f(0.0f,1.0f,0.0f);
+                glVertex3f(i * (float)planeSize/xQuads, 0.0f, (j+1) * (float)planeSize/xQuads);
+
+                glTexCoord2f(0.0f, 0.0f);  // coords for the texture
+                glNormal3f(0.0f,1.0f,0.0f);
+                glVertex3f((i+1) * (float)planeSize/xQuads, 0.0f, (j+1) * (float)planeSize/xQuads);
+
+                glTexCoord2f(0.0f, 1.0f);  // coords for the texture
+                glNormal3f(0.0f,1.0f,0.0f);
+                glVertex3f((i+1) * (float)planeSize/xQuads, 0.0f, j * (float)planeSize/xQuads);
+
+                glTexCoord2f(1.0f, 1.0f);  // coords for the texture
+                glNormal3f(0.0f,1.0f,0.0f);
+                glVertex3f(i * (float)planeSize/xQuads, 0.0f, j * (float)planeSize/xQuads);
+
+            glEnd();
+        }
+    }
+
+	glDisable(GL_TEXTURE_2D);
+
+	glPopMatrix();
+}
+
 void Scenario::render()
 {
     glClearColor(backgrundColor[0],backgrundColor[1],backgrundColor[2],backgrundColor[3]);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  // limpar o depth buffer
+    glMatrixMode(GL_MODELVIEW);
     
     for(int i=0; i < SCENARIO_MAP_SIZE; i++) {
         for(int j=0; j < SCENARIO_MAP_SIZE; j++) {
             
-            if (map[i][j])
-                map[i][j]->Draw(SMOOTH_MATERIAL);
+            if (map[i][j]) {
+                
+                glPushMatrix();
+                
+                glTranslatef((GLfloat)i, (GLfloat)i, (GLfloat)j);
+                map[i][j]->Draw(SMOOTH_MATERIAL_TEXTURE);
+                
+                glPopMatrix();
+            }
         }
     }
+    
+    this->renderFloor();
 }
 
 void Scenario::init()
@@ -124,9 +207,9 @@ void Scenario::updateWindow(int windowWidth, int windowHeight)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(10.0,
-        10.0,
-        10.0,
+	gluLookAt(0.0,
+        40.0,
+        40.0,
         0.0,
         0.0,
         0.0,
