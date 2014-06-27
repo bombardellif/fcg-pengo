@@ -7,6 +7,7 @@
 class Enemy : public Movable
 {
 private:
+        //Enemy();
 	double direction;
 
 	C3DObject model;

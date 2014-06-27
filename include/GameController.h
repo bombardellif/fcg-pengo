@@ -5,33 +5,45 @@
 #include "Penguin.h"
 #include "Enemy.h"
 
-#define MAX_BLOCKING_MOVEMENTS 10
-#define MAX_NORMAL_MOVEMENTS 50
-#define MAX_ENEMIES 10
+#include <list>
+
+//#define MAX_BLOCKING_MOVEMENTS 10
+//#define MAX_NORMAL_MOVEMENTS 50
+//#define MAX_ENEMIES 10
+#define DEFAULT_PENGUIN_SPEED 1
+#define DEFAULT_MAX_CONCEIVING_BLOCKS 5
 
 class GameController
 {
 private:
-	LinearMovement blockingMovements[MAX_BLOCKING_MOVEMENTS];
+	std::list<Movement*> blockingMovements;
 
-	LinearMovement normalMovements[MAX_NORMAL_MOVEMENTS];
+	std::list<Movement*> normalMovements;
 
 	Penguin penguin;
 
-	Enemy enemies[MAX_ENEMIES];
+	std::list<Enemy> enemies;
+
+        double penguinSpeed;
+
+        int maxConceivingBlocks;
 
 public:
 	bool upPressed;
 
 	bool downPressed;
 
-	bool rightPressed;
+	bool turnClockwisePressed;
 
-	bool leftPressed;
+	bool turnCounterClockwisePressed;
 
 
 public:
+        GameController();
 	void update();
-
+        void interpretBlockableCommand();
+        void interpretNonBlockableCommand();
+        void moveEnemy(const Enemy& enemy);
+        std::pair<int, int> getNextPosition(const Penguin& penguin, int distance);
 };
 #endif
