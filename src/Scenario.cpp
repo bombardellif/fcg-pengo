@@ -191,26 +191,26 @@ void Scenario::updateCamera()
     
     switch(this->cameraState) {
         case SCENARIO_CAMERA_TP:
-            gluLookAt(20.0,
-                20.0,
-                20.0,
-                0.0,
-                0.0,
-                0.0,
+            gluLookAt(eyesPosition[0] + SCENARIO_CENTER_TRANSLATION,
+                eyesPosition[1],
+                eyesPosition[2] + SCENARIO_CENTER_TRANSLATION,
+                focusPosition[0] + SCENARIO_CENTER_TRANSLATION,
+                focusPosition[1],
+                focusPosition[2] + SCENARIO_CENTER_TRANSLATION,
                 0.0,
                 1.0,
                 0.0);
             break;
         case SCENARIO_CAMERA_FP:
-            /*gluLookAt(eyesPosition[0],
+            gluLookAt(eyesPosition[0] + SCENARIO_CENTER_TRANSLATION,
                 eyesPosition[1],
-                eyesPosition[2],
-                focusPosition[0],
+                eyesPosition[2] + SCENARIO_CENTER_TRANSLATION,
+                focusPosition[0] + SCENARIO_CENTER_TRANSLATION,
                 focusPosition[1],
-                focusPosition[2],
+                focusPosition[2] + SCENARIO_CENTER_TRANSLATION,
                 0.0,
                 1.0,
-                0.0);*/
+                0.0);
             break;
         case SCENARIO_CAMERA_OVER:
             GLfloat mapCenter = SCENARIO_MAP_SIZE/2.0f;
@@ -235,7 +235,7 @@ void Scenario::render()
     this->updateCamera();
     
     glPushMatrix();
-    glTranslatef(0.5, 0.0, 0.5);
+    glTranslatef(SCENARIO_CENTER_TRANSLATION, 0.0, SCENARIO_CENTER_TRANSLATION);
     for(int i=0; i < SCENARIO_MAP_SIZE; i++) {
         for(int j=0; j < SCENARIO_MAP_SIZE; j++) {
             

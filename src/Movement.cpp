@@ -1,6 +1,6 @@
 #include "Movement.h"
 
-Movement::Movement(const Movable& object): object(object), speed(DEFAULT_SPEED), ready(false)
+Movement::Movement(const Movable& _object): object(_object), speed(DEFAULT_SPEED), ready(false)
 {
 }
 

@@ -108,7 +108,7 @@ void mainInit() {
     
     scenario.init();
     
-    gameController.penguin = *(scenario.penguin);
+    //gameController.penguin = *(scenario.penguin);
 }
 
 /*

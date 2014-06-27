@@ -9,8 +9,8 @@ class Movement
 {
 protected:
 	Movable object;
-        double speed;
-        bool ready;
+    double speed;
+    bool ready;
 
 public:
         Movement(const Movable& _object);

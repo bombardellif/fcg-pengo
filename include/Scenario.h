@@ -13,6 +13,8 @@
 #define SCENARIO_CAMERA_FP 1
 #define SCENARIO_CAMERA_OVER 2
 
+#define SCENARIO_CENTER_TRANSLATION 0.5f
+
 #define SCENARIO_MAP_SIZE 16
 #define SCENARIO_MAP_FILENAME "map.bmp"
 #define SCENARIO_TEXTURE_FLOOR_FILENAME "groundTexture.bmp"
@@ -60,7 +62,7 @@ public:
 
 	void updateWindow(int windowWidth, int windowHeight);
 
-        bool outOfMap(std::pair<int, int> position);
+    bool outOfMap(std::pair<int, int> position);
 
 };
 #endif
