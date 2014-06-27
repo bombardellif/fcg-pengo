@@ -267,3 +267,6 @@ void Scenario::updateWindow(int windowWidth, int windowHeight)
     
     this->updateCamera();
 }
+
+bool Scenario::outOfMap(std::pair<int, int> position){
+}

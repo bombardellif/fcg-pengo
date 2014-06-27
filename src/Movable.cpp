@@ -4,6 +4,17 @@
 #include <math.h>
 
 DiscreteDirection Movable::getDiscreteDirection(){
+
+    assert(direction >= 0 && direction <= 2*M_PI);
+
+    if (direction > M_PI/4 && direction <= 3*M_PI/4)
+        return UP;
+    else if (direction > 3*M_PI/4 && direction <= 5*M_PI/4)
+        return LEFT;
+    else if (direction > 5*M_PI/4 && direction <= 7*M_PI/4)
+        return DOWN;
+    else
+        return RIGHT;
 }
 
 /**
@@ -13,9 +24,9 @@ DiscreteDirection Movable::getDiscreteDirection(){
  * @return Nova posição do objeto após percorrer "distance" em linha reta na direção atual
  * @see Movable::getDiscreteDirection
  */
-std::pair<int, int> Movable::getNewPosition(int distance){
+template<typename T> std::pair<T, T> Movable::getNewPosition(T distance){
 
-    std::pair<int, int> newPosition = position;
+    std::pair<T, T> newPosition = position;
 
     if (getDiscreteDirection() == UP)
         newPosition.second -= distance;
@@ -26,10 +37,13 @@ std::pair<int, int> Movable::getNewPosition(int distance){
     else if (getDiscreteDirection() == LEFT)
             newPosition.first += distance;
     else
-        assert(false);
+        assert(false); //Shall never happen
 
     return newPosition;
 }
+
+template std::pair<int, int> Movable::getNewPosition<int>(int distance);
+template std::pair<double, double> Movable::getNewPosition<double>(double distance);
 
 /**
  * Return the new direction (related to the map) of this object, given theta (in rad) around its own center.

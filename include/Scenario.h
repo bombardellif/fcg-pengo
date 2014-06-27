@@ -60,5 +60,7 @@ public:
 
 	void updateWindow(int windowWidth, int windowHeight);
 
+        bool outOfMap(std::pair<int, int> position);
+
 };
 #endif

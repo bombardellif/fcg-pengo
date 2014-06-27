@@ -11,5 +11,6 @@ private:
 
 public:
 	LinearMovement(const Movable& object, std::pair<double,double> destiny);
+        void move();
 };
 #endif

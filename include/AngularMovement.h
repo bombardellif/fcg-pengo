@@ -7,13 +7,15 @@
 class AngularMovement : public Movement
 {
 private:
+	double destiny;
+
 	bool clockWise;
 
-	double destiny;
 
 
 public:
 	AngularMovement(const Movable& object, double destiny, bool clockWise);
 
+        void move();
 };
 #endif

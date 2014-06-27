@@ -12,10 +12,11 @@ public:
         
         double direction;
         
-        std::pair<int, int> getNewPosition(int distance);
+        template<typename T> std::pair<T, T> getNewPosition(T distance);
 
         double getNewDirection(double turn);
 
         DiscreteDirection getDiscreteDirection();
 };
+
 #endif
