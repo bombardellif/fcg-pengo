@@ -12,7 +12,7 @@ private:
 	double direction;
     
 public:
-    Enemy(C3DObject* _model);
+    Enemy(C3DObject* _model, std::pair<double, double> _position);
     
     virtual void draw();
 

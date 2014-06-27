@@ -13,9 +13,9 @@ protected:
     bool ready;
 
 public:
-    Movement(const Movable& object);
+        Movement(const Movable& _object);
 
-    Movement(const Movable& object, double speed);
+        Movement(const Movable& _object, double speed);
 
 	virtual void move() = 0;
 

@@ -5,6 +5,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <iostream>
+#include <utility>
 #include "bitmap.h"
 #include "Block.h"
 
@@ -84,19 +85,23 @@ void Scenario::initMap()
                 obj = new C3DObject();
                 obj->Load((this->resourceFolder + SCENARIO_IMBLOCK_FILENAME).c_str());
                 
-                map[row][col] = new Block(obj, Item(), false);
+                map[row][col] = new Block(obj, std::pair<double,double>((double)col, (double)row), Item(), false);
                 break;
             case SCENARIO_MAP_COLOR_BLOCK:
                 
                 obj = new C3DObject();
                 obj->Load((this->resourceFolder + SCENARIO_BLOCK_FILENAME).c_str());
                 
-                map[row][col] = new Block(obj, Item(), true);
+                map[row][col] = new Block(obj, std::pair<double,double>((double)col, (double)row), Item(), true);
                 break;
             default:
                 map[row][col] = NULL;
         }
     }
+    
+    obj = new C3DObject();
+    obj->Load((this->resourceFolder + SCENARIO_PENGUIN_FILENAME).c_str());
+    map[1][1] = this->penguin = new Penguin(obj, std::pair<double, double>(1,1));
     
     // finally
     free(bits);
@@ -178,19 +183,37 @@ void Scenario::renderFloor()
 
 void Scenario::updateCamera()
 {
+    std::vector<double> eyesPosition = this->penguin->getEyesPosition();
+    std::vector<double> focusPosition = this->penguin->getFocusPosition();
+    std::pair<double, double> backPosition;
+    
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+    
     switch(this->cameraState) {
         case SCENARIO_CAMERA_TP:
-            gluLookAt(20.0,
-                20.0,
-                20.0,
-                0.0,
-                0.0,
-                0.0,
+            backPosition = this->penguin->getNewPosition<double>(-2.0);
+            
+            gluLookAt(backPosition.first + SCENARIO_CENTER_TRANSLATION,
+                eyesPosition[1] + 0.5,
+                backPosition.second + SCENARIO_CENTER_TRANSLATION,
+                focusPosition[0] + SCENARIO_CENTER_TRANSLATION,
+                focusPosition[1],
+                focusPosition[2] + SCENARIO_CENTER_TRANSLATION,
                 0.0,
                 1.0,
                 0.0);
             break;
         case SCENARIO_CAMERA_FP:
+            gluLookAt(eyesPosition[0] + SCENARIO_CENTER_TRANSLATION,
+                eyesPosition[1],
+                eyesPosition[2] + SCENARIO_CENTER_TRANSLATION,
+                focusPosition[0] + SCENARIO_CENTER_TRANSLATION,
+                focusPosition[1],
+                focusPosition[2] + SCENARIO_CENTER_TRANSLATION,
+                0.0,
+                1.0,
+                0.0);
             break;
         case SCENARIO_CAMERA_OVER:
             GLfloat mapCenter = SCENARIO_MAP_SIZE/2.0f;
@@ -211,11 +234,11 @@ void Scenario::render()
 {
     glClearColor(backgrundColor[0],backgrundColor[1],backgrundColor[2],backgrundColor[3]);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  // limpar o depth buffer
-    glMatrixMode(GL_MODELVIEW);
-    //glLoadIdentity();
+    
+    this->updateCamera();
     
     glPushMatrix();
-    glTranslatef(0.5, 0.0, 0.5);
+    glTranslatef(SCENARIO_CENTER_TRANSLATION, 0.0, SCENARIO_CENTER_TRANSLATION);
     for(int i=0; i < SCENARIO_MAP_SIZE; i++) {
         for(int j=0; j < SCENARIO_MAP_SIZE; j++) {
             
@@ -233,8 +256,6 @@ void Scenario::render()
     glPopMatrix();
     
     this->renderFloor();
-    
-    //this->updateCamera();
 }
 
 void Scenario::init()
@@ -262,10 +283,7 @@ void Scenario::updateWindow(int windowWidth, int windowHeight)
 	glLoadIdentity();
 	gluPerspective(45.0f, (GLfloat)windowWidth/(GLfloat)windowHeight, 0.1f, 100.0f);
 
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-    
-    this->updateCamera();
+    //this->updateCamera();
 }
 
 bool Scenario::outOfMap(std::pair<int, int> position){

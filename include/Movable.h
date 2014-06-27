@@ -8,15 +8,21 @@
 class Movable
 {
 public:
+    Movable(std::pair<double, double> _position);
+    
+    Movable(std::pair<double, double> _position, double direction);
+    
 	std::pair<double, double> position;
         
-        double direction;
-        
-        template<typename T> std::pair<T, T> getNewPosition(T distance);
+    double direction;
 
-        double getNewDirection(double turn);
+    template<typename T> std::pair<T, T> getNewPosition(T distance);
 
-        DiscreteDirection getDiscreteDirection();
+    std::pair<int, int> getNewPosition(int distance);
+
+    double getNewDirection(double turn);
+
+    DiscreteDirection getDiscreteDirection();
 };
 
 #endif

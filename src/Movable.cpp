@@ -3,6 +3,17 @@
 #include <assert.h>
 #include <math.h>
 
+Movable::Movable(std::pair<double, double> _position)
+:position(_position)
+{
+}
+
+Movable::Movable(std::pair<double, double> _position, double _direction)
+:position(_position),
+direction(_direction)
+{
+}
+
 DiscreteDirection Movable::getDiscreteDirection(){
 
     assert(direction >= 0 && direction <= 2*M_PI);
@@ -33,9 +44,9 @@ template<typename T> std::pair<T, T> Movable::getNewPosition(T distance){
     else if (getDiscreteDirection() == RIGHT)
         newPosition.first += distance;
     else if (getDiscreteDirection() == DOWN)
-            newPosition.second -= distance;
+            newPosition.second += distance;
     else if (getDiscreteDirection() == LEFT)
-            newPosition.first += distance;
+            newPosition.first -= distance;
     else
         assert(false); //Shall never happen
 
