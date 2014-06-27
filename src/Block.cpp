@@ -9,7 +9,7 @@ Modelable(_model)
 
 void Block::draw()
 {
-    glTranslatef(0.0, 1.0, 0.0);
+	glTranslatef((GLfloat)position.first, 1.0, (GLfloat)position.second);
     glScalef(0.5, 0.5, 0.5);
     Modelable::draw();
 }

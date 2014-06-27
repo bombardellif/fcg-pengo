@@ -10,7 +10,9 @@ private:
 	std::pair<double,double> destiny;
 
 public:
-	LinearMovement(const Movable& object, std::pair<double,double> destiny);
-        void move();
+	LinearMovement(Movable* object, std::pair<double,double> destiny);
+	LinearMovement(Movable* object, std::pair<double, double> destiny, double speed);
+
+    void move();
 };
 #endif

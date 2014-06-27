@@ -14,7 +14,7 @@
 #include <GL/glut.h>
 //#include "gl.h"
 
-#include <math.h>
+#include <cmath>
 
 typedef	struct									
 {

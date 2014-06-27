@@ -246,7 +246,6 @@ void Scenario::render()
                 
                 glPushMatrix();
                 
-                glTranslatef((GLfloat)j, 0.0, (GLfloat)i);
                 map[i][j]->draw();
                 
                 glPopMatrix();

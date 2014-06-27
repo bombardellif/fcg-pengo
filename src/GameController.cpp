@@ -1,6 +1,6 @@
 #include "GameController.h"
 #include <algorithm>
-#include <math.h>
+#include <cmath>
 
 #include "DiscreteDirection.h"
 #include "LinearMovement.h"
@@ -20,10 +20,11 @@ GameController::GameController(): penguinSpeed(GAMECONTROLLER_DEFAULT_PENGUIN_SP
 
 void GameController::update()
 {
+    
     //If there is no movements in action blocking the user input, then treat their input
     if (blockingMovements.empty()){
         interpretBlockableCommand();
-    }
+    }	
 
     //Moves the current movements
     for (std::list<Movement*>::iterator it=blockingMovements.begin(); it != blockingMovements.end(); ++it){
@@ -31,7 +32,7 @@ void GameController::update()
         (*current).move();
         //If the movement is over, finishes it
         if ((*current).isReady()){
-            blockingMovements.erase(it);
+            it = blockingMovements.erase(it);
             delete current;
             current = NULL;
         }
@@ -63,22 +64,22 @@ void GameController::interpretBlockableCommand(){
     if (goForwardPressed){
         //Then creates new movement to this penguin (only one position)
         std::pair<int, int> nextPosition = penguin->getNewPosition<int>(1);
-        LinearMovement* newMove = new LinearMovement(*penguin, nextPosition);
+        LinearMovement* newMove = new LinearMovement(penguin, nextPosition, penguinSpeed);
         blockingMovements.push_back(newMove);
     }else if(goBackwardsPressed){
         //Penguin wants to go backwards, creates a movement for this
         std::pair<int, int> nextPosition = penguin->getNewPosition<int>(-1);
-        LinearMovement* newMove = new LinearMovement(*penguin, nextPosition);
+        LinearMovement* newMove = new LinearMovement(penguin, nextPosition, penguinSpeed);
         blockingMovements.push_back(newMove);
     }else if(turnClockwisePressed){
         //Turn penguin right (clockwise) 90°
         double nextDirection = penguin->getNewDirection(-M_PI/2);
-        AngularMovement* newMove = new AngularMovement(*penguin, nextDirection, true);
+        AngularMovement* newMove = new AngularMovement(penguin, nextDirection, true);
         blockingMovements.push_back(newMove);
     }else if (turnCounterClockwisePressed){
         //Turn penguin left (counter-clockwise) 90°
         double nextDirection = penguin->getNewDirection(M_PI/2);
-        AngularMovement* newMove = new AngularMovement(*penguin, nextDirection, false);
+        AngularMovement* newMove = new AngularMovement(penguin, nextDirection, false);
         blockingMovements.push_back(newMove);
     }
 
@@ -92,7 +93,7 @@ void GameController::interpretBlockableCommand(){
             if (block != NULL && block->mobile){ //It is a block
 				//Push it to the bounds
 				std::pair<int, int> blockDestiny = penguin->getNewPosition<int>(SCENARIO_MAP_SIZE);				
-				LinearMovement* newBlockMove = new LinearMovement(*block, blockDestiny);
+				LinearMovement* newBlockMove = new LinearMovement(block, blockDestiny);
                 normalMovements.push_back(newBlockMove);
             }
         }
@@ -113,8 +114,9 @@ void GameController::moveEnemy(const Enemy& enemy){
 }
 
 std::pair<double, double> GameController::translateMapToGL(std::pair<int, int> mapCoordinate){
+	return (std::pair<double, double>)(mapCoordinate);
 }
 
-void GameController::takeActionToColision(Movable actor, std::pair<int, int> desiredPosition)
+void GameController::takeActionToColision(const Movable* actor, std::pair<int, int> desiredPosition)
 {
 }

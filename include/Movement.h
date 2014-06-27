@@ -3,19 +3,19 @@
 
 #include "Movable.h"
 
-#define DEFAULT_SPEED 1
+#define MOVEMENT_DEFAULT_SPEED 1
 
 class Movement
 {
 protected:
-	Movable object;
+	Movable* object;
     double speed;
     bool ready;
 
 public:
-        Movement(const Movable& _object);
+        Movement(Movable* _object);
 
-        Movement(const Movable& _object, double speed);
+        Movement(Movable* _object, double speed);
 
 	virtual void move() = 0;
 

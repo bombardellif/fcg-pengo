@@ -22,6 +22,14 @@
 #define APP_NAME "FCG - Pengo"
 #define SLEEP_MS 30
 #define SLEEP_uS SLEEP_MS * 1000
+#define GO_FORWARD_KEY 'w'
+#define GO_BACKWARDS_KEY 's'
+#define TURN_CLOCKWISE_KEY 'd'
+#define TURN_COUNTERCLOCKWISE_KEY 'a'
+#define PUSH_KEY ' '
+#define CREATE_BLOCK_KEY 16 //SHIFT
+#define CHANGE_CAMERA_KEY 'v'
+
 
 using namespace std;
 
@@ -63,11 +71,28 @@ void onWindowReshape(int x, int y) {
  * Key press event handler
 */
 void onKeyDown(unsigned char key, int x, int y) {
-    
 	switch (key) {
-		
-		default:
-			break;
+		case GO_FORWARD_KEY:
+			gameController.goForwardPressed = true;
+		break;
+		case GO_BACKWARDS_KEY:
+			gameController.goBackwardsPressed = true;
+		break;
+		case TURN_CLOCKWISE_KEY:
+			gameController.turnClockwisePressed = true;
+		break;
+		case TURN_COUNTERCLOCKWISE_KEY:
+			gameController.turnCounterClockwisePressed = true;
+		break;
+		case PUSH_KEY:
+			gameController.pushPressed = true;
+		break;
+		case CREATE_BLOCK_KEY:
+			gameController.createnewBlockPressed = true;
+		break;
+		case CHANGE_CAMERA_KEY:
+			gameController.changeCameraPressed = true;
+		break;
 	}
 }
 
@@ -76,8 +101,26 @@ void onKeyDown(unsigned char key, int x, int y) {
 */
 void onKeyUp(unsigned char key, int x, int y) {
 	switch (key) {
-		case 119:
-			gameController.goForwardPressed = true;
+		case GO_FORWARD_KEY:
+			gameController.goForwardPressed = false;
+		break;
+		case GO_BACKWARDS_KEY:
+			gameController.goBackwardsPressed = false;
+		break;
+		case TURN_CLOCKWISE_KEY:
+			gameController.turnClockwisePressed = false;
+		break;
+		case TURN_COUNTERCLOCKWISE_KEY:
+			gameController.turnCounterClockwisePressed = false;
+		break;
+		case PUSH_KEY:
+			gameController.pushPressed = false;
+		break;
+		case CREATE_BLOCK_KEY:
+			gameController.createnewBlockPressed = false;
+		break;
+		case CHANGE_CAMERA_KEY:
+			gameController.changeCameraPressed = false;
 		break;
 	}
 }
@@ -86,7 +129,7 @@ void onKeyUp(unsigned char key, int x, int y) {
  * Render scene
 */
 void mainRender() {
-	// GameController.getInstance().update();
+	gameController.update();
 	scenario.render();
     
 	glFlush();
