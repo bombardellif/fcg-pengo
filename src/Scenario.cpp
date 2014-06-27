@@ -117,7 +117,7 @@ void Scenario::initLight()
 	GLfloat light_ambient[] = { backgrundColor[0], backgrundColor[1], backgrundColor[2], backgrundColor[3] };
 	GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
 	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat light_position1[] = {3.0, 3.0, 3.0, 0.0 };
+	GLfloat light_position1[] = {SCENARIO_MAP_SIZE/2.0, SCENARIO_MAP_SIZE, SCENARIO_MAP_SIZE/2.0, 0.0};
 
     // Light 0
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);

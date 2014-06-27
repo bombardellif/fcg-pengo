@@ -1,0 +1,17 @@
+# Wavefront material library
+# Tue Aug 03 08:00:06 1999
+# Created with Viewpoint Interchange www.viewpoint.com
+
+newmtl bee_wing
+Ka 0.784314 0.784314 1
+Kd 0.784314 0.784314 1
+Ks 0.784314 0.784314 1
+illum 2
+map_Kd bee.tga
+
+newmtl bee_body
+Ka 0.011765 0.752941 0.752941
+Kd 0.909804 0.690196 0.905882
+Ks 0.933333 0.933333 0.933333
+illum 2
+map_Kd bee.tga

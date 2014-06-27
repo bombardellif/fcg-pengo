@@ -182,27 +182,6 @@ glmFindGroup(GLMmodel* model, char* name)
     return group;
 }
 
-/* glmAddGroup: Add a group to the model */
-GLMgroup*
-glmAddGroup(GLMmodel* model, char* name)
-{
-    GLMgroup* group;
-
-    group = glmFindGroup(model, name);
-    if (!group) {
-        group = (GLMgroup*)malloc(sizeof(GLMgroup));
-        group->name = strdup(name);
-        group->material = 0;
-        group->numtriangles = 0;
-        group->triangles = NULL;
-        group->next = model->groups;
-        model->groups = group;
-        model->numgroups++;
-    }
-
-    return group;
-}
-
 /* glmFindGroup: Find a material in the model */
 GLuint
 glmFindMaterial(GLMmodel* model, char* name)
@@ -224,6 +203,28 @@ glmFindMaterial(GLMmodel* model, char* name)
 found:
     return i;
 }
+
+/* glmAddGroup: Add a group to the model */
+GLMgroup*
+glmAddGroup(GLMmodel* model, char* name)
+{
+    GLMgroup* group;
+
+    group = glmFindGroup(model, name);
+    if (!group) {
+        group = (GLMgroup*)malloc(sizeof(GLMgroup));
+        group->name = strdup(name);
+        group->material = 0; //glmFindMaterial(model, group->name);
+        group->numtriangles = 0;
+        group->triangles = NULL;
+        group->next = model->groups;
+        model->groups = group;
+        model->numgroups++;
+    }
+
+    return group;
+}
+
 /* glmDirName: return the directory given a path
  *
  * path - filesystem path
@@ -563,6 +564,7 @@ static GLvoid glmFirstPass(GLMmodel* model, FILE* file, mycallback *call)
                 break;
             case 'g':               /* group */
                 /* eat up rest of line */
+                fgetc(file);// eats the space
                 fgets(buf, sizeof(buf), file);
 #if SINGLE_STRING_GROUP_NAMES
                 sscanf(buf, "%s", buf);
@@ -717,6 +719,7 @@ static GLvoid glmSecondPass(GLMmodel* model, FILE* file, mycallback *call)
                 break;
             case 'g':               /* group */
                 /* eat up rest of line */
+                fgetc(file);
                 fgets(buf, sizeof(buf), file);
 #if SINGLE_STRING_GROUP_NAMES
                 sscanf(buf, "%s", buf);
