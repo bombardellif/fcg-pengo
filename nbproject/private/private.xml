@@ -6,7 +6,8 @@
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>ects/fcg-pengo/src/Movable.cpp</file>
+        <group>
+            <file>file:/home/william/NetBeansProjects/fcg-pengo/src/Movable.cpp</file>
             <file>file:/home/william/NetBeansProjects/fcg-pengo/include/Movable.h</file>
             <file>file:/home/william/NetBeansProjects/fcg-pengo/include/AngularMovement.h</file>
             <file>file:/home/william/NetBeansProjects/fcg-pengo/src/AngularMovement.cpp</file>
@@ -19,8 +20,7 @@
             <file>file:/home/william/NetBeansProjects/fcg-pengo/src/LinearMovement.cpp</file>
             <file>file:/home/william/NetBeansProjects/fcg-pengo/include/GameController.h</file>
             <file>file:/home/william/NetBeansProjects/fcg-pengo/src/GameController.cpp</file>
-            <file>file:/home/william/Net
-            <file>file:/home/william/NetBeansProjBeansProjects/fcg-pengo/src/Movement.cpp</file>
+            <file>file:/home/william/NetBeansProjects/fcg-pengo/src/Movement.cpp</file>
             <file>file:/home/william/NetBeansProjects/fcg-pengo/src/Penguin.cpp</file>
         </group>
     </open-files>
