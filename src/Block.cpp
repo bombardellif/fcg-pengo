@@ -1,8 +1,9 @@
 #include "Block.h"
 #include "Modelable.h"
 
-Block::Block(C3DObject* _model, Item item, bool mobile)
-:Modelable(_model)
+Block::Block(C3DObject* _model, std::pair<double, double> _position, Item item, bool mobile)
+:Movable(_position),
+Modelable(_model)
 {
 }
 

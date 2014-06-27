@@ -9,12 +9,12 @@ class Movement
 {
 protected:
 	Movable object;
-        double speed;
+    double speed;
 
 public:
-        Movement(const Movable& object);
+        Movement(const Movable& _object);
 
-        Movement(const Movable& object, double speed);
+        Movement(const Movable& _object, double speed);
 
 	void move();
 

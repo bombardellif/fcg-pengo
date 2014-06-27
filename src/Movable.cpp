@@ -3,6 +3,12 @@
 #include <assert.h>
 #include <math.h>
 
+Movable::Movable(std::pair<double, double> _position)
+:position(_position)
+{
+}
+
+
 DiscreteDirection Movable::getDiscreteDirection(){
 }
 

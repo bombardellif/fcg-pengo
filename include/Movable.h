@@ -8,14 +8,16 @@
 class Movable
 {
 public:
+    Movable(std::pair<double, double> _position);
+    
 	std::pair<double, double> position;
         
-        double direction;
-        
-        std::pair<int, int> getNewPosition(int distance);
+    double direction;
 
-        double getNewDirection(double turn);
+    std::pair<int, int> getNewPosition(int distance);
 
-        DiscreteDirection getDiscreteDirection();
+    double getNewDirection(double turn);
+
+    DiscreteDirection getDiscreteDirection();
 };
 #endif

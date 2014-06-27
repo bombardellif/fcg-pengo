@@ -15,7 +15,7 @@ public:
 
 
 public:
-	Block(C3DObject* _model, Item item, bool mobile);
+	Block(C3DObject* _model, std::pair<double, double> _position, Item item, bool mobile);
 
     virtual void draw();
     

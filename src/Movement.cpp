@@ -1,6 +1,6 @@
 #include "Movement.h"
 
-Movement::Movement(const Movable& object): speed(DEFAULT_SPPED){
+Movement::Movement(const Movable& _object): object(_object), speed(DEFAULT_SPPED){
 }
 
 
