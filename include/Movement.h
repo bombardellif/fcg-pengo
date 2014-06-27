@@ -9,13 +9,13 @@ class Movement
 {
 protected:
 	Movable object;
-        double speed;
-        bool ready;
+    double speed;
+    bool ready;
 
 public:
-        Movement(const Movable& object);
+    Movement(const Movable& object);
 
-        Movement(const Movable& object, double speed);
+    Movement(const Movable& object, double speed);
 
 	virtual void move() = 0;
 

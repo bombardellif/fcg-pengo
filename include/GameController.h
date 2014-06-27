@@ -43,11 +43,11 @@ public:
 
 	bool createnewBlockPressed;
 
-	Penguin& penguin;
+	Penguin* penguin;
 
 
 public:
-	GameController(Penguin& penguin);
+	GameController(Penguin* penguin);
 	GameController();
 	void update();
 	void interpretBlockableCommand();

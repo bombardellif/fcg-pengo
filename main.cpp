@@ -76,8 +76,9 @@ void onKeyDown(unsigned char key, int x, int y) {
 */
 void onKeyUp(unsigned char key, int x, int y) {
 	switch (key) {
-		default:
-			break;
+		case 119:
+			gameController.goForwardPressed = true;
+		break;
 	}
 }
 
@@ -108,7 +109,7 @@ void mainInit() {
     
     scenario.init();
     
-    gameController.penguin = *(scenario.penguin);
+    gameController.penguin = scenario.penguin;
 }
 
 /*

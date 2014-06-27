@@ -10,11 +10,11 @@
 
 extern Scenario scenario;
 
-GameController::GameController(Penguin& penguin): penguinSpeed(GAMECONTROLLER_DEFAULT_PENGUIN_SPEED), maxConceivingBlocks(GAMECONTROLLER_DEFAULT_MAX_CONCEIVING_BLOCKS), penguin(penguin)
+GameController::GameController(Penguin* penguin): penguinSpeed(GAMECONTROLLER_DEFAULT_PENGUIN_SPEED), maxConceivingBlocks(GAMECONTROLLER_DEFAULT_MAX_CONCEIVING_BLOCKS), penguin(penguin)
 {
 }
 
-GameController::GameController(): penguinSpeed(GAMECONTROLLER_DEFAULT_PENGUIN_SPEED), maxConceivingBlocks(GAMECONTROLLER_DEFAULT_MAX_CONCEIVING_BLOCKS), penguin(penguin)
+GameController::GameController(): penguinSpeed(GAMECONTROLLER_DEFAULT_PENGUIN_SPEED), maxConceivingBlocks(GAMECONTROLLER_DEFAULT_MAX_CONCEIVING_BLOCKS), penguin(NULL)
 {
 }
 
@@ -62,36 +62,36 @@ void GameController::interpretBlockableCommand(){
     //Penguin wants to go forward
     if (goForwardPressed){
         //Then creates new movement to this penguin (only one position)
-        std::pair<int, int> nextPosition = penguin.getNewPosition<int>(1);
-        LinearMovement* newMove = new LinearMovement(penguin, nextPosition);
+        std::pair<int, int> nextPosition = penguin->getNewPosition<int>(1);
+        LinearMovement* newMove = new LinearMovement(*penguin, nextPosition);
         blockingMovements.push_back(newMove);
     }else if(goBackwardsPressed){
         //Penguin wants to go backwards, creates a movement for this
-        std::pair<int, int> nextPosition = penguin.getNewPosition<int>(-1);
-        LinearMovement* newMove = new LinearMovement(penguin, nextPosition);
+        std::pair<int, int> nextPosition = penguin->getNewPosition<int>(-1);
+        LinearMovement* newMove = new LinearMovement(*penguin, nextPosition);
         blockingMovements.push_back(newMove);
     }else if(turnClockwisePressed){
         //Turn penguin right (clockwise) 90°
-        double nextDirection = penguin.getNewDirection(-M_PI/2);
-        AngularMovement* newMove = new AngularMovement(penguin, nextDirection, true);
+        double nextDirection = penguin->getNewDirection(-M_PI/2);
+        AngularMovement* newMove = new AngularMovement(*penguin, nextDirection, true);
         blockingMovements.push_back(newMove);
     }else if (turnCounterClockwisePressed){
         //Turn penguin left (counter-clockwise) 90°
-        double nextDirection = penguin.getNewDirection(M_PI/2);
-        AngularMovement* newMove = new AngularMovement(penguin, nextDirection, false);
+        double nextDirection = penguin->getNewDirection(M_PI/2);
+        AngularMovement* newMove = new AngularMovement(*penguin, nextDirection, false);
         blockingMovements.push_back(newMove);
     }
 
     //Penguin wants to push a block
     if (pushPressed){
         //Take the position in front and verify if it is a block
-        std::pair<int, int> frontPosition = penguin.getNewPosition<int>(1);
+        std::pair<int, int> frontPosition = penguin->getNewPosition<int>(1);
         if (!scenario.outOfMap(frontPosition)){
             
             Block* block = dynamic_cast<Block*>(scenario.map[frontPosition.first][frontPosition.second]);
             if (block != NULL && block->mobile){ //It is a block
 				//Push it to the bounds
-				std::pair<int, int> blockDestiny = penguin.getNewPosition<int>(SCENARIO_MAP_SIZE);				
+				std::pair<int, int> blockDestiny = penguin->getNewPosition<int>(SCENARIO_MAP_SIZE);				
 				LinearMovement* newBlockMove = new LinearMovement(*block, blockDestiny);
                 normalMovements.push_back(newBlockMove);
             }
