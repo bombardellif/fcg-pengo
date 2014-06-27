@@ -20,8 +20,9 @@
 #define SCENARIO_TEXTURE_FLOOR_FILENAME "groundTexture.bmp"
 #define SCENARIO_MAP_COLOR_IMBLOCK 0x000000FF
 #define SCENARIO_MAP_COLOR_BLOCK 0x0000FF00
-#define SCENARIO_IMBLOCK_FILENAME "penguin.obj"
+#define SCENARIO_IMBLOCK_FILENAME "block.obj"
 #define SCENARIO_BLOCK_FILENAME "block.obj"
+#define SCENARIO_PENGUIN_FILENAME "penguin.obj"
 
 class Scenario
 {

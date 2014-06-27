@@ -100,8 +100,8 @@ void Scenario::initMap()
     }
     
     obj = new C3DObject();
-    obj->Load((this->resourceFolder + SCENARIO_IMBLOCK_FILENAME).c_str());
-    this->penguin = new Penguin(obj, std::pair<double, double>(0,0));
+    obj->Load((this->resourceFolder + SCENARIO_PENGUIN_FILENAME).c_str());
+    map[1][1] = this->penguin = new Penguin(obj, std::pair<double, double>(1,1));
     
     // finally
     free(bits);
@@ -185,15 +185,18 @@ void Scenario::updateCamera()
 {
     std::vector<double> eyesPosition = this->penguin->getEyesPosition();
     std::vector<double> focusPosition = this->penguin->getFocusPosition();
+    std::pair<double, double> backPosition;
     
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
     
     switch(this->cameraState) {
         case SCENARIO_CAMERA_TP:
-            gluLookAt(eyesPosition[0] + SCENARIO_CENTER_TRANSLATION,
-                eyesPosition[1],
-                eyesPosition[2] + SCENARIO_CENTER_TRANSLATION,
+            backPosition = this->penguin->getNewPosition<double>(-2.0);
+            
+            gluLookAt(backPosition.first + SCENARIO_CENTER_TRANSLATION,
+                eyesPosition[1] + 0.5,
+                backPosition.second + SCENARIO_CENTER_TRANSLATION,
                 focusPosition[0] + SCENARIO_CENTER_TRANSLATION,
                 focusPosition[1],
                 focusPosition[2] + SCENARIO_CENTER_TRANSLATION,
