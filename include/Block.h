@@ -4,12 +4,10 @@
 #include "Movable.h"
 #include "3DObject.h"
 #include "Item.h"
+#include "Modelable.h"
 
-class Block : public Movable
+class Block : public Movable, public Modelable
 {
-private:
-	C3DObject model;
-
 public:
 	Item item;
 
@@ -17,8 +15,10 @@ public:
 
 
 public:
-	Block(Item item, bool mobile);
+	Block(C3DObject* _model, Item item, bool mobile);
 
+    virtual void draw();
+    
 	void conceive();
 
 	void materialize();

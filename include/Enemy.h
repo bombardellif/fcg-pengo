@@ -3,13 +3,17 @@
 
 #include "Movable.h"
 #include "3DObject.h"
+#include "Modelable.h"
 
-class Enemy : public Movable
+class Enemy : public Movable, public Modelable
 {
 private:
 	double direction;
-
-	C3DObject model;
+    
+public:
+    Enemy(C3DObject* _model);
+    
+    virtual void draw();
 
 };
 #endif

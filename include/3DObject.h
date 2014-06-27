@@ -10,6 +10,10 @@
 #include "glm.h"
 
 
+#define SMOOTH 0
+#define SMOOTH_MATERIAL 1
+#define SMOOTH_MATERIAL_TEXTURE 2
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 class C3DObject {

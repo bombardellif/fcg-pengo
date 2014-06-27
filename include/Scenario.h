@@ -7,6 +7,11 @@
 #include <GL/glu.h>
 #include "bitmap.h"
 #include "Modelable.h"
+#include "Penguin.h"
+
+#define SCENARIO_CAMERA_TP 0
+#define SCENARIO_CAMERA_FP 1
+#define SCENARIO_CAMERA_OVER 2
 
 #define SCENARIO_MAP_SIZE 16
 #define SCENARIO_MAP_FILENAME "map.bmp"
@@ -14,7 +19,7 @@
 #define SCENARIO_MAP_COLOR_IMBLOCK 0x000000FF
 #define SCENARIO_MAP_COLOR_BLOCK 0x0000FF00
 #define SCENARIO_IMBLOCK_FILENAME "penguin.obj"
-#define SCENARIO_BLOCK_FILENAME "penguin.obj"
+#define SCENARIO_BLOCK_FILENAME "block.obj"
 
 class Scenario
 {
@@ -36,12 +41,18 @@ private:
     
     void renderFloor();
     
+    void updateCamera();
+    
 public:
-	C3DObject* map[SCENARIO_MAP_SIZE][SCENARIO_MAP_SIZE];
+	Modelable* map[SCENARIO_MAP_SIZE][SCENARIO_MAP_SIZE];
+    
+    Penguin* penguin;
 
 	int cameraState;
 
 	Scenario(std::string _resourceFolder);
+    
+    ~Scenario();
 
 	void render();
 
