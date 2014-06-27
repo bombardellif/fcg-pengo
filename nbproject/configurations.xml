@@ -8,6 +8,7 @@
       <itemPath>include/AngularMovement.h</itemPath>
       <itemPath>include/Block.h</itemPath>
       <itemPath>include/Conception.h</itemPath>
+      <itemPath>include/DiscreteDirection.h</itemPath>
       <itemPath>include/Enemy.h</itemPath>
       <itemPath>include/EnemyInteligence.h</itemPath>
       <itemPath>include/GameController.h</itemPath>
@@ -97,6 +98,8 @@
       <item path="include/Block.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Conception.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/DiscreteDirection.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Enemy.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -190,6 +193,8 @@
       <item path="include/Block.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Conception.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/DiscreteDirection.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Enemy.h" ex="false" tool="3" flavor2="0">
       </item>

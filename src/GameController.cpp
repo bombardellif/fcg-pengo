@@ -1,11 +1,14 @@
 #include "GameController.h"
 #include <algorithm>
+#include <math.h>
+
+#include "DiscreteDirection.h"
+#include "LinearMovement.h"
+#include "AngularMovement.h"
 
 GameController::GameController(): penguinSpeed(DEFAULT_PENGUIN_SPEED), maxConceivingBlocks(DEFAULT_MAX_CONCEIVING_BLOCKS)
 {
 }
-
-
 
 void GameController::update()
 {
@@ -44,26 +47,31 @@ void GameController::update()
     //@TODO: Iterate in conceptions
     
     //Check for new commands, that don't get blocked
-    interpretNonBlockableCommand();
+    //interpretNonBlockableCommand();
 }
 
 void GameController::interpretBlockableCommand(){
     //Penguin wants to go forward
     if (upPressed){
-        //Then creates new movement to this penguin
-        std::pair<int, int> nextPosition = getNextPosition(penguin, 1);
+        //Then creates new movement to this penguin (only one position)
+        std::pair<int, int> nextPosition = penguin.getNewPosition(1);
         LinearMovement* newMove = new LinearMovement(penguin, nextPosition);
         blockingMovements.push_back(newMove);
     }else if(downPressed){
-        //Penguin wants to go backwards
-        std::pair<int, int> nextPosition = getNextPosition(penguin, -1);
+        //Penguin wants to go backwards, creates a movement for this
+        std::pair<int, int> nextPosition = penguin.getNewPosition(-1);
         LinearMovement* newMove = new LinearMovement(penguin, nextPosition);
         blockingMovements.push_back(newMove);
     }else if(turnClockwisePressed){
         //Turn penguin right (clockwise) 90°
-        //double nextDirection = getNextDirection(penguin, -PI/2);
-        //AngularMovement* newMove = new AngularMovement(penguin, nextPosition);
-        //blockingMovements.push_back(newMove);
+        double nextDirection = penguin.getNewDirection(-M_PI/2);
+        AngularMovement* newMove = new AngularMovement(penguin, nextDirection, true);
+        blockingMovements.push_back(newMove);
+    }else if (turnCounterClockwisePressed){
+        //Turn penguin left (counter-clockwise) 90°
+        double nextDirection = penguin.getNewDirection(M_PI/2);
+        AngularMovement* newMove = new AngularMovement(penguin, nextDirection, false);
+        blockingMovements.push_back(newMove);
     }
 }
 
@@ -73,5 +81,3 @@ void GameController::interpretNonBlockableCommand(){
 void GameController::moveEnemy(const Enemy& enemy){
 }
 
-std::pair<int, int> GameController::getNextPosition(const Penguin& penguin, int distance){
-}

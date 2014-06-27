@@ -9,9 +9,7 @@ class LinearMovement : public Movement
 private:
 	std::pair<double,double> destiny;
 
-
 public:
 	LinearMovement(const Movable& object, std::pair<double,double> destiny);
-
 };
 #endif

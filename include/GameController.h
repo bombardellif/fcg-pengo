@@ -1,9 +1,9 @@
 #ifndef GAME_CONTROLLER_H
 #define GAME_CONTROLLER_H
 
-#include "LinearMovement.h"
 #include "Penguin.h"
 #include "Enemy.h"
+#include "Movement.h"
 
 #include <list>
 
@@ -44,6 +44,5 @@ public:
         void interpretBlockableCommand();
         void interpretNonBlockableCommand();
         void moveEnemy(const Enemy& enemy);
-        std::pair<int, int> getNextPosition(const Penguin& penguin, int distance);
 };
 #endif

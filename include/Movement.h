@@ -11,7 +11,6 @@ protected:
 	Movable object;
         double speed;
 
-
 public:
         Movement(const Movable& object);
 
