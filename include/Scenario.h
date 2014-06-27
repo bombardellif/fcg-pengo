@@ -8,7 +8,7 @@
 #include "bitmap.h"
 #include "Modelable.h"
 
-#define SCENARIO_MAP_SIZE 15
+#define SCENARIO_MAP_SIZE 16
 #define SCENARIO_MAP_FILENAME "map.bmp"
 #define SCENARIO_TEXTURE_FLOOR_FILENAME "groundTexture.bmp"
 #define SCENARIO_MAP_COLOR_IMBLOCK 0x000000FF

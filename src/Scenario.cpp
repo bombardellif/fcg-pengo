@@ -34,12 +34,12 @@ void Scenario::initMap()
     GLubyte *bits;
     BITMAPINFO *info = NULL;
     short row, col;
-    int bitIndex, i;
+    int bitIndex, i, size;
     C3DObject *obj;
     Modelable *mappedModel;
     GLuint pixel;
     
-    // Load the 8x8 Bitmap that describes the map
+    // Load the Bitmap that describes the map
     bits = LoadDIBitmap((this->resourceFolder + SCENARIO_MAP_FILENAME).c_str(), &info);
     if (bits == NULL) {
 		throw string("Error loading map file!");
@@ -50,13 +50,13 @@ void Scenario::initMap()
         throw string("Error loading map file: Invalid image size!");
     }
     
-    for(bitIndex=0, i = info->bmiHeader.biWidth * info->bmiHeader.biHeight; i > 0 ; i--, bitIndex += 3)
+    for(bitIndex = i = 0, size=SCENARIO_MAP_SIZE*SCENARIO_MAP_SIZE; i < size ; i++, bitIndex += 3)
     {
         row = i / SCENARIO_MAP_SIZE;
         col = i % SCENARIO_MAP_SIZE;
         
         // interpret the RGB pixel (3 bytes) as an RGBA pixel (4 bytes)
-        pixel = ((GLuint)bits[bitIndex]) & 0x00ffffff;
+        pixel = *((GLuint*)(bits+bitIndex)) & 0x00ffffff;
         
         // TODO: instanciate the models according to the bitmap
         switch (pixel) {
@@ -161,7 +161,10 @@ void Scenario::render()
     glClearColor(backgrundColor[0],backgrundColor[1],backgrundColor[2],backgrundColor[3]);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  // limpar o depth buffer
     glMatrixMode(GL_MODELVIEW);
+    //glLoadIdentity();
     
+    glPushMatrix();
+    glTranslatef(0.5, 1.0, 0.5);
     for(int i=0; i < SCENARIO_MAP_SIZE; i++) {
         for(int j=0; j < SCENARIO_MAP_SIZE; j++) {
             
@@ -169,13 +172,14 @@ void Scenario::render()
                 
                 glPushMatrix();
                 
-                glTranslatef((GLfloat)i, (GLfloat)i, (GLfloat)j);
+                glTranslatef((GLfloat)j, 0.0, (GLfloat)i);
                 map[i][j]->Draw(SMOOTH_MATERIAL_TEXTURE);
                 
                 glPopMatrix();
             }
         }
     }
+    glPopMatrix();
     
     this->renderFloor();
 }
@@ -207,9 +211,9 @@ void Scenario::updateWindow(int windowWidth, int windowHeight)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0.0,
-        40.0,
-        40.0,
+	gluLookAt(20.0,
+        20.0,
+        20.0,
         0.0,
         0.0,
         0.0,
