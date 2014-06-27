@@ -822,16 +822,22 @@ static GLvoid glmSecondPass(GLMmodel* model, FILE* file, mycallback *call)
 					//if (n== 181228)
                     sscanf(buf, "%d", &v);
                     T(numtriangles).vindices[0] = v;
+                    T(numtriangles).tindices[0] = 0;
                     fscanf(file, "%d", &v);
                     T(numtriangles).vindices[1] = v;
+                    T(numtriangles).tindices[1] = 0;
                     fscanf(file, "%d", &v);
                     T(numtriangles).vindices[2] = v;
+                    T(numtriangles).tindices[2] = 0;
                     group->triangles[group->numtriangles++] = numtriangles;
                     numtriangles++;
                     while(fscanf(file, "%d", &v) > 0) {
                         T(numtriangles).vindices[0] = T(numtriangles-1).vindices[0];
+                        T(numtriangles).tindices[0] = T(numtriangles-1).tindices[0];
                         T(numtriangles).vindices[1] = T(numtriangles-1).vindices[2];
+                        T(numtriangles).tindices[1] = T(numtriangles-1).tindices[2];
                         T(numtriangles).vindices[2] = v;
+                        T(numtriangles).tindices[2] = 0;
                         group->triangles[group->numtriangles++] = numtriangles;
                         numtriangles++;
                     }
