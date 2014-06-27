@@ -12,7 +12,9 @@ public:
     
 	std::pair<double, double> position;
         
-    double direction;
+        double direction;
+        
+        template<typename T> std::pair<T, T> getNewPosition(T distance);
 
     std::pair<int, int> getNewPosition(int distance);
 
@@ -20,4 +22,5 @@ public:
 
     DiscreteDirection getDiscreteDirection();
 };
+
 #endif

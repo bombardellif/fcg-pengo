@@ -6,7 +6,11 @@
 #include "LinearMovement.h"
 #include "AngularMovement.h"
 
-GameController::GameController(Penguin& penguin): penguin(penguin), penguinSpeed(DEFAULT_PENGUIN_SPEED), maxConceivingBlocks(DEFAULT_MAX_CONCEIVING_BLOCKS)
+GameController::GameController(Penguin& penguin): penguinSpeed(DEFAULT_PENGUIN_SPEED), maxConceivingBlocks(DEFAULT_MAX_CONCEIVING_BLOCKS), penguin(penguin)
+{
+}
+
+GameController::GameController(): penguinSpeed(DEFAULT_PENGUIN_SPEED), maxConceivingBlocks(DEFAULT_MAX_CONCEIVING_BLOCKS), penguin(penguin)
 {
 }
 
@@ -54,12 +58,12 @@ void GameController::interpretBlockableCommand(){
     //Penguin wants to go forward
     if (upPressed){
         //Then creates new movement to this penguin (only one position)
-        std::pair<int, int> nextPosition = penguin.getNewPosition(1);
+        std::pair<int, int> nextPosition = penguin.getNewPosition<int>(1);
         LinearMovement* newMove = new LinearMovement(penguin, nextPosition);
         blockingMovements.push_back(newMove);
     }else if(downPressed){
         //Penguin wants to go backwards, creates a movement for this
-        std::pair<int, int> nextPosition = penguin.getNewPosition(-1);
+        std::pair<int, int> nextPosition = penguin.getNewPosition<int>(-1);
         LinearMovement* newMove = new LinearMovement(penguin, nextPosition);
         blockingMovements.push_back(newMove);
     }else if(turnClockwisePressed){
@@ -81,3 +85,9 @@ void GameController::interpretNonBlockableCommand(){
 void GameController::moveEnemy(const Enemy& enemy){
 }
 
+std::pair<double, double> GameController::translateMapToGL(std::pair<int, int> mapCoordinate){
+}
+
+void GameController::takeActionToColision(Movable actor, std::pair<int, int> desiredPosition)
+{
+}

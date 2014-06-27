@@ -17,6 +17,7 @@
 #include "bitmap.h"
 #include "3DObject.h"
 #include "Scenario.h"
+#include "GameController.h"
 
 #define APP_NAME "FCG - Pengo"
 #define SLEEP_MS 30
@@ -42,6 +43,7 @@ static int mainWindowId = 0;
  * Global objects of game control
  */
 Scenario scenario("res/");
+GameController gameController;
 
 /* END of Global Variables*/
 
@@ -105,6 +107,8 @@ void mainInit() {
     glViewport(0, 0, windowWidth, windowHeight);
     
     scenario.init();
+    
+    gameController.penguin = *(scenario.penguin);
 }
 
 /*

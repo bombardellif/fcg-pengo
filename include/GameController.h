@@ -20,8 +20,6 @@ private:
 
 	std::list<Movement*> normalMovements;
 
-	Penguin& penguin;
-
 	std::list<Enemy> enemies;
 
         double penguinSpeed;
@@ -29,7 +27,6 @@ private:
         int maxConceivingBlocks;
 
 public:
-        GameController(Penguin& penguin);
 
 	bool upPressed;
 
@@ -39,12 +36,17 @@ public:
 
 	bool turnCounterClockwisePressed;
 
+        Penguin& penguin;
+
 
 public:
+        GameController(Penguin& penguin);
         GameController();
 	void update();
         void interpretBlockableCommand();
         void interpretNonBlockableCommand();
         void moveEnemy(const Enemy& enemy);
+        std::pair<double, double> translateMapToGL(std::pair<int, int> mapCoordinate);
+        void takeActionToColision(Movable actor, std::pair<int, int> desiredPosition);
 };
 #endif
