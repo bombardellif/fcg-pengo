@@ -19,6 +19,8 @@
 #include "Scenario.h"
 #include "GameController.h"
 
+#include <iostream>
+
 #define APP_NAME "FCG - Pengo"
 #define SLEEP_MS 5
 #define SLEEP_uS SLEEP_MS * 1000
@@ -27,7 +29,7 @@
 #define TURN_CLOCKWISE_KEY 'd'
 #define TURN_COUNTERCLOCKWISE_KEY 'a'
 #define PUSH_KEY ' '
-#define CREATE_BLOCK_KEY 16 //SHIFT
+#define CREATE_BLOCK_KEY 'e'
 #define CHANGE_CAMERA_KEY 'v'
 
 
@@ -122,13 +124,13 @@ void onKeyUp(unsigned char key, int x, int y) {
 		case CHANGE_CAMERA_KEY:
 			gameController.changeCameraPressed = false;
 		break;
-	}
+	}	
 }
 
 /**
  * Render scene
 */
-void mainRender() {
+void mainRender() {	
 	gameController.update();
 	scenario.render();
     
@@ -152,8 +154,6 @@ void mainInit() {
     
     scenario.init();
     gameController.init();
-    
-    //gameController.penguin = scenario.penguin;
 }
 
 /*

@@ -9,6 +9,7 @@
 #include "AngularMovement.h"
 #include "Scenario.h"
 #include "Block.h"
+#include <iostream>
 
 extern Scenario scenario;
 
@@ -72,7 +73,7 @@ void GameController::update()
         (*current).move();
         //If the movement is over, finishes it
         if ((*current).isReady()){
-            normalMovements.erase(it);
+            it = normalMovements.erase(it);
             delete current;
             current = NULL;
         }
@@ -86,7 +87,7 @@ void GameController::update()
     //@TODO: Iterate in conceptions
     
     //Check for new commands, that don't get blocked
-    //interpretNonBlockableCommand();
+    interpretNonBlockableCommand();
 }
 
 void GameController::interpretBlockableCommand(){
@@ -94,18 +95,21 @@ void GameController::interpretBlockableCommand(){
     if (goForwardPressed){
         //Then creates new movement to this penguin (only one position)
         std::pair<int, int> nextPosition = penguin->getNewPosition<int>(1);
-        LinearMovement* newMove = new LinearMovement(penguin, nextPosition, penguinSpeed);
+        LinearMovement* newMove = new LinearMovement(penguin, nextPosition, true, penguinSpeed);
         blockingMovements.push_back(newMove);
+		
     }else if(goBackwardsPressed){
         //Penguin wants to go backwards, creates a movement for this
         std::pair<int, int> nextPosition = penguin->getNewPosition<int>(-1);
-        LinearMovement* newMove = new LinearMovement(penguin, nextPosition, penguinSpeed);
+        LinearMovement* newMove = new LinearMovement(penguin, nextPosition, false, penguinSpeed);
         blockingMovements.push_back(newMove);
+		
     }else if(turnClockwisePressed){
         //Turn penguin right (clockwise) 90°
         double nextDirection = penguin->getNewDirection(-M_PI_2);
         AngularMovement* newMove = new AngularMovement(penguin, nextDirection, true);
         blockingMovements.push_back(newMove);
+		
     }else if (turnCounterClockwisePressed){
         //Turn penguin left (counter-clockwise) 90°
         double nextDirection = penguin->getNewDirection(M_PI_2);
@@ -120,24 +124,23 @@ void GameController::interpretBlockableCommand(){
         if (!scenario.outOfMap(frontPosition)){
             
             Block* block = dynamic_cast<Block*>(scenario.map[frontPosition.first][frontPosition.second]);
-            if (block != NULL && block->mobile){ //It is a block
+            if (block != NULL && block->mobile){ //It is a mobile block
 				//Push it to the bounds
 				std::pair<int, int> blockDestiny = penguin->getNewPosition<int>(SCENARIO_MAP_SIZE);				
-				LinearMovement* newBlockMove = new LinearMovement(block, blockDestiny);
+				LinearMovement* newBlockMove = new LinearMovement(block, blockDestiny, true);
                 normalMovements.push_back(newBlockMove);
             }
         }
     }
-
-	//Change camera position
-	if (changeCameraPressed)
-		scenario.cameraState = (scenario.cameraState + 1) % GAMECONTROLLER_NUM_CAMERAS;
 	
 	//Create new Block
 	//if(createNewBlockPressed)
 }
 
 void GameController::interpretNonBlockableCommand(){
+	//Change camera position
+	if (changeCameraPressed)
+		scenario.cameraState = (scenario.cameraState + 1) % GAMECONTROLLER_NUM_CAMERAS;
 }
 
 void GameController::moveEnemy(const Enemy& enemy){
@@ -147,6 +150,7 @@ std::pair<double, double> GameController::translateMapToGL(std::pair<int, int> m
 	return (std::pair<double, double>)(mapCoordinate);
 }
 
+//@TODO: Colisões
 void GameController::takeActionToColision(const Movable* actor, std::pair<int, int> desiredPosition)
 {
 }
