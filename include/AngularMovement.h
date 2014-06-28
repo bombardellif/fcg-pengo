@@ -17,6 +17,8 @@ private:
 
 public:
 	AngularMovement(Movable* object, double destiny, bool clockWise);
+    
+    AngularMovement(Movable* object, double destiny, bool clockWise, double speed);
 
     void move();
 };

@@ -8,6 +8,13 @@ AngularMovement::AngularMovement(Movable* object, double destiny, bool clockWise
 {
 }
 
+AngularMovement::AngularMovement(Movable* object, double destiny, bool clockWise, double speed)
+: Movement(object, speed)
+,destiny(destiny)
+, clockWise(clockWise)
+{
+}
+
 void AngularMovement::move()
 {
 	//Error accepted regarded to the discretization of the movement

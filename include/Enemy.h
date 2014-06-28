@@ -8,11 +8,12 @@
 #include "Penguin.h"
 #include "Observable.h"
 
+#define ENEMY_DISTANCE_LOOK_PENGUIN 4.0
+#define ENEMEY_SPEED 0.5
+
 class Enemy : public Movable, public Modelable, public Observer
 {
 private:
-	double direction;
-    
     bool inMovement;
     
 public:

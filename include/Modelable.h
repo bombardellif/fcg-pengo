@@ -2,6 +2,7 @@
 #define MODELABLE_H
 
 #include "3DObject.h"
+#define MODELABLE_OFFSET_DIRECAO_MODELO M_PI_2
 
 class Modelable
 {
