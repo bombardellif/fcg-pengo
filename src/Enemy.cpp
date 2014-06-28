@@ -9,7 +9,7 @@ Enemy::Enemy(C3DObject* _model, std::pair<double, double> _position)
 
 void Enemy::draw()
 {
-    
+    glTranslatef((GLfloat)position.first, 1.0, (GLfloat)position.second);
     Modelable::draw();
 }
 

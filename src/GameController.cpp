@@ -1,6 +1,8 @@
 #include "GameController.h"
 #include <algorithm>
 #include <cmath>
+#include <cstdlib>
+#include <ctime>
 
 #include "DiscreteDirection.h"
 #include "LinearMovement.h"
@@ -16,6 +18,34 @@ GameController::GameController(Penguin* penguin): penguinSpeed(GAMECONTROLLER_DE
 
 GameController::GameController(): penguinSpeed(GAMECONTROLLER_DEFAULT_PENGUIN_SPEED), maxConceivingBlocks(GAMECONTROLLER_DEFAULT_MAX_CONCEIVING_BLOCKS), penguin(NULL)
 {
+}
+
+void GameController::init()
+{
+    std::vector< std::pair<int,int> > freePositions = scenario.getFreeMapPositions();
+    int size = freePositions.size();
+    
+    if (size < GAMECONTROLLER_MIN_ENEMIES + 1) {
+        throw std::string("Mapa não permite ciração dos elementos do jogo");
+    }
+    
+    std::srand(std::time(NULL));
+    int randomPosition;
+    
+    for (int i=0; i<GAMECONTROLLER_MIN_ENEMIES + 1; i++) {
+        randomPosition = rand() % size;
+        
+        std::pair<int,int> &newPosition = freePositions[randomPosition];
+        
+        if (i == 0) {
+            this->penguin = scenario.createPenguinAt(newPosition.first, newPosition.second);
+        } else {
+            scenario.createEnemyAt(newPosition.first, newPosition.second);
+        }
+        
+        size--;
+        freePositions.erase(freePositions.begin() + randomPosition);
+    }
 }
 
 void GameController::update()

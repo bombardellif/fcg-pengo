@@ -20,7 +20,7 @@
 #include "GameController.h"
 
 #define APP_NAME "FCG - Pengo"
-#define SLEEP_MS 30
+#define SLEEP_MS 5
 #define SLEEP_uS SLEEP_MS * 1000
 #define GO_FORWARD_KEY 'w'
 #define GO_BACKWARDS_KEY 's'
@@ -151,8 +151,9 @@ void mainInit() {
     glViewport(0, 0, windowWidth, windowHeight);
     
     scenario.init();
+    gameController.init();
     
-    gameController.penguin = scenario.penguin;
+    //gameController.penguin = scenario.penguin;
 }
 
 /*
