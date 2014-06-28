@@ -8,10 +8,7 @@
 #include "Modelable.h"
 
 class Penguin : public Movable, public Modelable
-{
-private:
-	double direction;
-    
+{    
 public:
     Penguin(C3DObject* _model, std::pair<double, double> _position);
     

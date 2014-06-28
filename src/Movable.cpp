@@ -1,7 +1,9 @@
 #include "Movable.h"
 
 #include <assert.h>
-#include <math.h>
+#include <cmath>
+#include <limits>
+#include <iostream>
 
 Movable::Movable(std::pair<double, double> _position)
 :position(_position)
@@ -16,7 +18,8 @@ direction(_direction)
 
 DiscreteDirection Movable::getDiscreteDirection(){
 
-    assert(direction >= 0 && direction <= 2*M_PI);
+    assert(direction >= 0.0);
+	assert((direction - 2*M_PI) <= std::numeric_limits<double>::epsilon());
 
     if (direction > M_PI/4 && direction <= 3*M_PI/4)
         return UP;
@@ -64,7 +67,7 @@ template std::pair<double, double> Movable::getNewPosition<double>(double distan
 double Movable::getNewDirection(double theta){
 
     double newDirection = direction;
-
+	
     newDirection += theta;
 
     //Normalize newDirection between 0 and 2PI (inclusive both)
@@ -76,8 +79,11 @@ double Movable::getNewDirection(double theta){
     
     //Make newDirection positive, but representing the same angle as before
     if (newDirection < 0){
-        newDirection = 2*M_PI - newDirection;
+        newDirection = 2*M_PI + newDirection;
     }
+	
+	assert(newDirection >= 0.0);
+	assert((newDirection - 2*M_PI) <= std::numeric_limits<double>::epsilon());
 
     return newDirection;
 }

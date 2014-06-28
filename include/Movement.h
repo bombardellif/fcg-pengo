@@ -13,9 +13,9 @@ protected:
     bool ready;
 
 public:
-        Movement(Movable* _object);
+    Movement(Movable* _object);
 
-        Movement(Movable* _object, double speed);
+    Movement(Movable* _object, double speed);
 
 	virtual void move() = 0;
 

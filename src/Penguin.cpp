@@ -5,6 +5,9 @@
 #include <vector>
 #include <cmath>
 
+#define PENGUIN_OFFSET_DIRECAO_MODELO M_PI_2
+#define radToDegree(r) (r + PENGUIN_OFFSET_DIRECAO_MODELO) * 180/M_PI
+
 Penguin::Penguin(C3DObject* _model, std::pair<double, double> _position)
 :Movable(_position, 3*M_PI_2),
 Modelable(_model)
@@ -15,6 +18,7 @@ void Penguin::draw()
 {
 	glTranslatef((GLfloat)position.first, 1.0, (GLfloat)position.second);
     glScalef(0.75, 0.75, 0.75);
+	glRotatef(radToDegree(direction), 0.0, 1.0, 0.0);
     Modelable::draw();
 }
 

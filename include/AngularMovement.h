@@ -4,6 +4,8 @@
 #include "Movement.h"
 #include "Movable.h"
 
+#define ANGULARMOVEMENT_DEFAULT_SPEED M_PI_2
+
 class AngularMovement : public Movement
 {
 private:
@@ -16,6 +18,6 @@ private:
 public:
 	AngularMovement(Movable* object, double destiny, bool clockWise);
 
-        void move();
+    void move();
 };
 #endif

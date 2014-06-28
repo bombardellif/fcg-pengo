@@ -73,12 +73,12 @@ void GameController::interpretBlockableCommand(){
         blockingMovements.push_back(newMove);
     }else if(turnClockwisePressed){
         //Turn penguin right (clockwise) 90°
-        double nextDirection = penguin->getNewDirection(-M_PI/2);
+        double nextDirection = penguin->getNewDirection(-M_PI_2);
         AngularMovement* newMove = new AngularMovement(penguin, nextDirection, true);
         blockingMovements.push_back(newMove);
     }else if (turnCounterClockwisePressed){
         //Turn penguin left (counter-clockwise) 90°
-        double nextDirection = penguin->getNewDirection(M_PI/2);
+        double nextDirection = penguin->getNewDirection(M_PI_2);
         AngularMovement* newMove = new AngularMovement(penguin, nextDirection, false);
         blockingMovements.push_back(newMove);
     }
