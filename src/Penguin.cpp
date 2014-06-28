@@ -10,6 +10,8 @@
 #include <vector>
 #include <cmath>
 
+#define PENGUIN_OFFSET_DIRECAO_MODELO M_PI_2
+#define radToDegree(r) (r + PENGUIN_OFFSET_DIRECAO_MODELO) * 180/M_PI
 
 extern Scenario scenario;
 
