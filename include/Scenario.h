@@ -2,12 +2,15 @@
 #define SCENARIO_H
 
 #include <string>
+#include <utility>
+#include <vector>
 
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "bitmap.h"
 #include "Modelable.h"
 #include "Penguin.h"
+#include "Enemy.h"
 
 #define SCENARIO_CAMERA_TP 0
 #define SCENARIO_CAMERA_FP 1
@@ -66,6 +69,11 @@ public:
 	void updateWindow(int windowWidth, int windowHeight);
 
     bool outOfMap(std::pair<int, int> position);
-
+    
+    std::vector<std::pair<int,int> > getFreeMapPositions();
+    
+    Enemy* createEnemyAt(int row, int col);
+    
+    Penguin* createPenguinAt(int row, int col);
 };
 #endif

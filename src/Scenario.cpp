@@ -8,6 +8,7 @@
 #include <utility>
 #include "bitmap.h"
 #include "Block.h"
+#include "Enemy.h"
 
 using namespace std;
 
@@ -98,10 +99,6 @@ void Scenario::initMap()
                 map[row][col] = NULL;
         }
     }
-    
-    obj = new C3DObject();
-    obj->Load((this->resourceFolder + SCENARIO_PENGUIN_FILENAME).c_str());
-    map[1][1] = this->penguin = new Penguin(obj, std::pair<double, double>(1,1));
     
     // finally
     free(bits);
@@ -286,4 +283,39 @@ void Scenario::updateWindow(int windowWidth, int windowHeight)
 }
 
 bool Scenario::outOfMap(std::pair<int, int> position){
+}
+
+std::vector< std::pair<int,int> > Scenario::getFreeMapPositions()
+{
+    std::vector< std::pair<int,int> > result;
+    
+    for(int i=0; i < SCENARIO_MAP_SIZE; i++) {
+        for(int j=0; j < SCENARIO_MAP_SIZE; j++) {
+            
+            if (!map[i][j])
+                result.push_back(std::pair<int,int>(i, j));
+        }
+    }
+    
+    return result;
+}
+
+Enemy* Scenario::createEnemyAt(int row, int col)
+{
+    C3DObject* obj = new C3DObject();
+    obj->Load((this->resourceFolder + SCENARIO_ENEMY_FILENAME).c_str());
+    
+    Enemy* enemy = new Enemy(obj, std::pair<double, double>(col,row));
+    
+    map[row][col] = enemy;
+    return enemy;
+}
+
+Penguin* Scenario::createPenguinAt(int row, int col)
+{
+    C3DObject* obj = new C3DObject();
+    obj->Load((this->resourceFolder + SCENARIO_PENGUIN_FILENAME).c_str());
+    
+    map[row][col] = this->penguin = new Penguin(obj, std::pair<double, double>(col,row));
+    return this->penguin;
 }
