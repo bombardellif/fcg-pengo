@@ -4,7 +4,7 @@
 #include "Movement.h"
 #include "Movable.h"
 
-#define ANGULARMOVEMENT_DEFAULT_SPEED M_PI_2
+#define ANGULARMOVEMENT_DEFAULT_SPEED M_PI/8
 
 class AngularMovement : public Movement
 {
