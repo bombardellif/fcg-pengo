@@ -17,6 +17,8 @@ public:
     Movement(Movable* _object);
 
     Movement(Movable* _object, double speed);
+    
+    virtual ~Movement();
 
 	virtual void move() = 0;
 

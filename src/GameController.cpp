@@ -68,6 +68,15 @@ void GameController::update()
             current = NULL;
         }
     }
+    
+    //Moves the enemies
+    for (std::list<Enemy*>::iterator it=enemies.begin(); it != enemies.end(); ++it){
+        Movement* move = (*it)->makeMovement(*this->penguin);
+        if (move) {
+            this->normalMovements.push_back(move);
+        }
+    }
+    
     for (std::list<Movement*>::iterator it=normalMovements.begin(); it != normalMovements.end(); ++it){
         Movement* current = (*it);
         (*current).move();
@@ -76,14 +85,6 @@ void GameController::update()
             it = normalMovements.erase(it);
             delete current;
             current = NULL;
-        }
-    }
-
-    //Moves the enemies
-    for (std::list<Enemy*>::iterator it=enemies.begin(); it != enemies.end(); ++it){
-        Movement* move = (*it)->makeMovement(*this->penguin);
-        if (move) {
-            this->normalMovements.push_back(move);
         }
     }
     

@@ -94,10 +94,10 @@ Movement* Enemy::makeMovement(const Penguin& pengo)
                 }
             }
             
-            newMove->addObserver(this);
-            this->inMovement = true;
         }
         
+        newMove->addObserver(this);
+        this->inMovement = true;
     }
     
     return newMove;

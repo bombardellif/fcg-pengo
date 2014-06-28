@@ -8,6 +8,10 @@ Movement::Movement(Movable* object, double speed): object(object), speed(speed),
 {
 }
 
+Movement::~Movement()
+{
+}
+
 bool Movement::isReady()
 {
     return ready;
