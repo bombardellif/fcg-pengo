@@ -3,7 +3,6 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
-#include <iostream>
 
 #include "DiscreteDirection.h"
 #include "LinearMovement.h"
@@ -38,7 +37,6 @@ void GameController::init()
         
         std::pair<int,int> &newPosition = freePositions[randomPosition];
         
-        std::cout << newPosition.first << "," << newPosition.second << std::endl;
         if (i == 0) {
             this->penguin = scenario.createPenguinAt(newPosition.first, newPosition.second);
         } else {
