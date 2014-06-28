@@ -16,6 +16,11 @@ direction(_direction)
 {
 }
 
+Movable::~Movable() {
+
+}
+
+
 DiscreteDirection Movable::getDiscreteDirection(){
 
     assert(direction >= 0.0);
@@ -58,6 +63,15 @@ template<typename T> std::pair<T, T> Movable::getNewPosition(T distance){
 
 template std::pair<int, int> Movable::getNewPosition<int>(int distance);
 template std::pair<double, double> Movable::getNewPosition<double>(double distance);
+
+std::pair<int, int> Movable::getNewCeilPosition(double distance){
+
+    std::pair<double, double> newPosition = getNewPosition<double>(distance);
+	newPosition.first = newPosition.first < 0 ? -ceil(fabs(newPosition.first)) : ceil(newPosition.first);
+	newPosition.second = newPosition.second < 0 ? -ceil(fabs(newPosition.second)) : ceil(newPosition.second);
+	
+    return newPosition;
+}
 
 /**
  * Return the new direction (related to the map) of this object, given theta (in rad) around its own center.

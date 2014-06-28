@@ -123,10 +123,11 @@ void GameController::interpretBlockableCommand(){
         std::pair<int, int> frontPosition = penguin->getNewPosition<int>(1);
         if (!scenario.outOfMap(frontPosition)){
             
-            Block* block = dynamic_cast<Block*>(scenario.map[frontPosition.first][frontPosition.second]);
+            Block* block = dynamic_cast<Block*>(scenario.map[frontPosition.second][frontPosition.first]);
             if (block != NULL && block->mobile){ //It is a mobile block
 				//Push it to the bounds
-				std::pair<int, int> blockDestiny = penguin->getNewPosition<int>(SCENARIO_MAP_SIZE);				
+				block->direction = penguin->direction;
+				std::pair<int, int> blockDestiny = penguin->getNewPosition<int>(SCENARIO_MAP_SIZE+1);				
 				LinearMovement* newBlockMove = new LinearMovement(block, blockDestiny, true);
                 normalMovements.push_back(newBlockMove);
             }
@@ -148,9 +149,4 @@ void GameController::moveEnemy(const Enemy& enemy){
 
 std::pair<double, double> GameController::translateMapToGL(std::pair<int, int> mapCoordinate){
 	return (std::pair<double, double>)(mapCoordinate);
-}
-
-//@TODO: Colisões
-void GameController::takeActionToColision(const Movable* actor, std::pair<int, int> desiredPosition)
-{
 }

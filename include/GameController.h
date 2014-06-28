@@ -57,6 +57,6 @@ public:
 	void interpretNonBlockableCommand();
 	void moveEnemy(const Enemy& enemy);
 	std::pair<double, double> translateMapToGL(std::pair<int, int> mapCoordinate);
-	void takeActionToColision(const Movable* actor, std::pair<int, int> desiredPosition);
+	void takeActionToColision(Movement* movement, std::pair<int, int> desiredPosition);
 };
 #endif

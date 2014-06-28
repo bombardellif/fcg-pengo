@@ -1,12 +1,17 @@
 #include "Penguin.h"
 #include "Modelable.h"
 #include "Movable.h"
+#include "Scenario.h"
+#include "Movement.h"
+#include "Block.h"
 #include "GL/gl.h"
 #include <vector>
 #include <cmath>
 
 #define PENGUIN_OFFSET_DIRECAO_MODELO M_PI_2
 #define radToDegree(r) (r + PENGUIN_OFFSET_DIRECAO_MODELO) * 180/M_PI
+
+extern Scenario scenario;
 
 Penguin::Penguin(C3DObject* _model, std::pair<double, double> _position)
 :Movable(_position, 3*M_PI_2),
@@ -43,4 +48,17 @@ std::vector<double> Penguin::getFocusPosition()
     result.push_back(nextStep.second);
     
     return result;
+}
+
+void Penguin::takeActionToColision(Movement* movement, std::pair<int, int> desiredPosition)
+{
+	if (scenario.outOfMap(desiredPosition)){
+		movement->ready = true;
+	}else{
+		//other = 
+		if (dynamic_cast<Block*>(scenario.map[desiredPosition.second][desiredPosition.first])){
+			movement->ready = true;
+			//position = desiredPosition;
+		}
+	}
 }

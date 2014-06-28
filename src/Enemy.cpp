@@ -1,5 +1,8 @@
 #include "Enemy.h"
 #include "Modelable.h"
+#include "Scenario.h"
+
+extern Scenario scenario;
 
 Enemy::Enemy(C3DObject* _model, std::pair<double, double> _position)
 :Movable(_position)
@@ -13,3 +16,9 @@ void Enemy::draw()
     Modelable::draw();
 }
 
+void Enemy::takeActionToColision(Movement* movement, std::pair<int, int> desiredPosition)
+{
+	if (scenario.outOfMap(desiredPosition)){
+		movement->ready = false;
+	}
+}

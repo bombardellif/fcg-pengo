@@ -1,13 +1,14 @@
 #ifndef MOVEMENT_H
 #define MOVEMENT_H
 
-#include "Movable.h"
-
 #define MOVEMENT_DEFAULT_SPEED 1
+
+class Movement;
+#include "Movable.h"
 
 class Movement
 {
-protected:
+public:
 	Movable* object;
     double speed;
     bool ready;
