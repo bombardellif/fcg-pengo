@@ -40,7 +40,7 @@ void GameController::init()
         if (i == 0) {
             this->penguin = scenario.createPenguinAt(newPosition.first, newPosition.second);
         } else {
-            scenario.createEnemyAt(newPosition.first, newPosition.second);
+            this->enemies.push_back(scenario.createEnemyAt(newPosition.first, newPosition.second));
         }
         
         size--;
@@ -72,16 +72,19 @@ void GameController::update()
         (*current).move();
         //If the movement is over, finishes it
         if ((*current).isReady()){
-            normalMovements.erase(it);
+            it = normalMovements.erase(it);
             delete current;
             current = NULL;
         }
     }
 
     //Moves the enemies
-    //for (std::list<Enemy>::iterator it=enemies.begin(); it != enemies.end(); ++it){
-    //    moveEnemy((*it));
-    //}
+    for (std::list<Enemy*>::iterator it=enemies.begin(); it != enemies.end(); ++it){
+        Movement* move = (*it)->makeMovement(*this->penguin);
+        if (move) {
+            this->normalMovements.push_back(move);
+        }
+    }
     
     //@TODO: Iterate in conceptions
     

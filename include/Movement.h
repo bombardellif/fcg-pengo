@@ -2,10 +2,11 @@
 #define MOVEMENT_H
 
 #include "Movable.h"
+#include "Observable.h"
 
 #define MOVEMENT_DEFAULT_SPEED 1
 
-class Movement
+class Movement: public Observable
 {
 protected:
 	Movable* object;

@@ -19,6 +19,10 @@ void AngularMovement::move()
 	if (fabs(yetToMove) <= e){
         ready = true;
 		object->direction = destiny;
+        
+        // notify Observers, once the movement is finished
+        this->notifyObservers();
+        
     }else{
 		//Define diretion and velocity of movement
 		double deltaMove;

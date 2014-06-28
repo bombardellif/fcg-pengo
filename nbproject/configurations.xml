@@ -17,11 +17,14 @@
       <itemPath>include/Modelable.h</itemPath>
       <itemPath>include/Movable.h</itemPath>
       <itemPath>include/Movement.h</itemPath>
+      <itemPath>include/Observable.h</itemPath>
+      <itemPath>include/Observer.h</itemPath>
       <itemPath>include/Penguin.h</itemPath>
       <itemPath>include/Scenario.h</itemPath>
       <itemPath>include/Texture.h</itemPath>
       <itemPath>include/bitmap.h</itemPath>
       <itemPath>include/glm.h</itemPath>
+      <itemPath>include/utils.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -42,6 +45,8 @@
       <itemPath>src/Modelable.cpp</itemPath>
       <itemPath>src/Movable.cpp</itemPath>
       <itemPath>src/Movement.cpp</itemPath>
+      <itemPath>src/Observable.cpp</itemPath>
+      <itemPath>src/Observer.cpp</itemPath>
       <itemPath>src/Penguin.cpp</itemPath>
       <itemPath>src/Scenario.cpp</itemPath>
       <itemPath>src/Texture.cpp</itemPath>
@@ -49,6 +54,7 @@
       <itemPath>src/glm.cpp</itemPath>
       <itemPath>src/glmimg.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
+      <itemPath>src/utils.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -117,6 +123,10 @@
       </item>
       <item path="include/Movement.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/Observable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Observer.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Penguin.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Scenario.h" ex="false" tool="3" flavor2="0">
@@ -126,6 +136,8 @@
       <item path="include/bitmap.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/glm.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/utils.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -153,6 +165,10 @@
       </item>
       <item path="src/Movement.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/Observable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Observer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="src/Penguin.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Scenario.cpp" ex="false" tool="1" flavor2="0">
@@ -164,6 +180,8 @@
       <item path="src/glm.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/glmimg.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utils.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -212,6 +230,10 @@
       </item>
       <item path="include/Movement.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/Observable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Observer.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Penguin.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Scenario.h" ex="false" tool="3" flavor2="0">
@@ -221,6 +243,8 @@
       <item path="include/bitmap.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/glm.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/utils.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -248,6 +272,10 @@
       </item>
       <item path="src/Movement.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/Observable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Observer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="src/Penguin.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Scenario.cpp" ex="false" tool="1" flavor2="0">
@@ -259,6 +287,8 @@
       <item path="src/glm.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/glmimg.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utils.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>
