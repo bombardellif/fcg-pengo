@@ -8,10 +8,11 @@ class LinearMovement : public Movement
 {
 private:
 	std::pair<double,double> destiny;
+	bool forward;
 
 public:
-	LinearMovement(Movable* object, std::pair<double,double> destiny);
-	LinearMovement(Movable* object, std::pair<double, double> destiny, double speed);
+	LinearMovement(Movable* object, std::pair<double,double> destiny, bool forward);
+	LinearMovement(Movable* object, std::pair<double, double> destiny, bool forward, double speed);
 
     void move();
 };

@@ -6,15 +6,16 @@
 #include <utility>
 #include <cassert>
 #include <cmath>
+#include <iostream>
 
 extern GameController gameController;
 extern Scenario scenario;
 
-LinearMovement::LinearMovement(Movable* object, std::pair<double, double> destiny):Movement(object, MOVEMENT_DEFAULT_SPEED), destiny(destiny)
+LinearMovement::LinearMovement(Movable* object, std::pair<double, double> destiny, bool forward):Movement(object, MOVEMENT_DEFAULT_SPEED), destiny(destiny), forward(forward)
 {
 }
 
-LinearMovement::LinearMovement(Movable* object, std::pair<double, double> destiny, double speed): Movement(object, speed), destiny(destiny)
+LinearMovement::LinearMovement(Movable* object, std::pair<double, double> destiny, bool forward, double speed): Movement(object, speed), destiny(destiny), forward(forward)
 {
 }
 
@@ -39,7 +40,7 @@ void LinearMovement::move(){
 		//Firsts are not equal, then get the remaining movement to perform
 		yetToMove = object->position.first - destinyInGL.first;
 	}
-    
+	
 	//If there is no more movement to perform, then movement is ready
 	if (fabs(yetToMove) <= e){
         ready = true;
@@ -50,7 +51,7 @@ void LinearMovement::move(){
     }else{
 		//Define diretion and velocity of movement
 		double deltaMove;
-		if (yetToMove < 0)
+		if (forward)
 			deltaMove = speed;
 		else
 			deltaMove = -speed;
@@ -58,13 +59,13 @@ void LinearMovement::move(){
         //If it has not finished moving yet, keep trying
         std::pair<int, int> nextPos = object->getNewPosition<int>(deltaMove);
         //Colision?
-        if (!scenario.outOfMap(nextPos) && scenario.map[nextPos.first][nextPos.second] != NULL){
+        //if (!scenario.outOfMap(nextPos) && scenario.map[nextPos.first][nextPos.second] != NULL){
             //Colision Occurred
-            gameController.takeActionToColision(object, nextPos);
-        }else{
+          //  gameController.takeActionToColision(object, nextPos);
+        //}else{
             //Normal exection, keep moving
             object->position = object->getNewPosition<double>(deltaMove);
-        }
+        //}
     }
 
 }
