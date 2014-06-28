@@ -10,9 +10,7 @@
 #include "Block.h"
 #include "Enemy.h"
 
-using namespace std;
-
-Scenario::Scenario(string _resourceFolder)
+Scenario::Scenario(std::string _resourceFolder)
 : backgrundColor({0.0f,0.0f,0.0f,1.0f}),
 resourceFolder(_resourceFolder),
 floorTexture(NULL),
@@ -44,7 +42,7 @@ void Scenario::initTexture()
     // Load the floor texture
     this->floorTexture = LoadDIBitmap((this->resourceFolder + SCENARIO_TEXTURE_FLOOR_FILENAME).c_str(), &this->floorTextureInfo);
     if (this->floorTexture == NULL) {
-        throw string("Error loading map file!");
+        throw std::string("Error loading map file!");
 	}
     
     // Create a texture object
@@ -58,18 +56,17 @@ void Scenario::initMap()
     short row, col;
     int bitIndex, i, size;
     C3DObject *obj;
-    Modelable *mappedModel;
     GLuint pixel;
     
     // Load the Bitmap that describes the map
     bits = LoadDIBitmap((this->resourceFolder + SCENARIO_MAP_FILENAME).c_str(), &info);
     if (bits == NULL) {
-		throw string("Error loading map file!");
+		throw std::string("Error loading map file!");
 	}
     
     // Create a RGBA image
     if (info->bmiHeader.biWidth != SCENARIO_MAP_SIZE || info->bmiHeader.biHeight != SCENARIO_MAP_SIZE) {
-        throw string("Error loading map file: Invalid image size!");
+        throw std::string("Error loading map file: Invalid image size!");
     }
     
     for(bitIndex = i = 0, size=SCENARIO_MAP_SIZE*SCENARIO_MAP_SIZE; i < size ; i++, bitIndex += 3)

@@ -8,6 +8,13 @@ AngularMovement::AngularMovement(Movable* object, double destiny, bool clockWise
 {
 }
 
+AngularMovement::AngularMovement(Movable* object, double destiny, bool clockWise, double speed)
+: Movement(object, speed)
+,destiny(destiny)
+, clockWise(clockWise)
+{
+}
+
 void AngularMovement::move()
 {
 	//Error accepted regarded to the discretization of the movement
@@ -19,6 +26,10 @@ void AngularMovement::move()
 	if (fabs(yetToMove) <= e){
         ready = true;
 		object->direction = destiny;
+        
+        // notify Observers, once the movement is finished
+        this->notifyObservers();
+        
     }else{
 		//Define diretion and velocity of movement
 		double deltaMove;

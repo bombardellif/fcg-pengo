@@ -4,6 +4,8 @@
 #include "Scenario.h"
 #include "Movement.h"
 #include "Block.h"
+#include "utils.h"
+
 #include "GL/gl.h"
 #include <vector>
 #include <cmath>
@@ -23,7 +25,7 @@ void Penguin::draw()
 {
 	glTranslatef((GLfloat)position.first, 1.0, (GLfloat)position.second);
     glScalef(0.75, 0.75, 0.75);
-	glRotatef(radToDegree(direction), 0.0, 1.0, 0.0);
+	glRotatef(radToDegree(direction + MODELABLE_OFFSET_DIRECAO_MODELO), 0.0, 1.0, 0.0);
     Modelable::draw();
 }
 

@@ -22,7 +22,7 @@ private:
 
 	std::list<Movement*> normalMovements;
 
-	std::list<Enemy> enemies;
+	std::list<Enemy*> enemies;
 
     double penguinSpeed;
 
@@ -45,7 +45,7 @@ public:
 	bool createnewBlockPressed;
 
 	Penguin* penguin;
-
+    
 
 public:
 	GameController(Penguin* penguin);

@@ -48,12 +48,15 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/Modelable.o \
 	${OBJECTDIR}/src/Movable.o \
 	${OBJECTDIR}/src/Movement.o \
+	${OBJECTDIR}/src/Observable.o \
+	${OBJECTDIR}/src/Observer.o \
 	${OBJECTDIR}/src/Penguin.o \
 	${OBJECTDIR}/src/Scenario.o \
 	${OBJECTDIR}/src/Texture.o \
 	${OBJECTDIR}/src/bitmap.o \
 	${OBJECTDIR}/src/glm.o \
-	${OBJECTDIR}/src/glmimg.o
+	${OBJECTDIR}/src/glmimg.o \
+	${OBJECTDIR}/src/utils.o
 
 
 # C Compiler Flags
@@ -145,6 +148,16 @@ ${OBJECTDIR}/src/Movement.o: src/Movement.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Movement.o src/Movement.cpp
 
+${OBJECTDIR}/src/Observable.o: src/Observable.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Observable.o src/Observable.cpp
+
+${OBJECTDIR}/src/Observer.o: src/Observer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Observer.o src/Observer.cpp
+
 ${OBJECTDIR}/src/Penguin.o: src/Penguin.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
@@ -174,6 +187,11 @@ ${OBJECTDIR}/src/glmimg.o: src/glmimg.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/glmimg.o src/glmimg.cpp
+
+${OBJECTDIR}/src/utils.o: src/utils.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/utils.o src/utils.cpp
 
 # Subprojects
 .build-subprojects:

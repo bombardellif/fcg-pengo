@@ -44,6 +44,9 @@ void LinearMovement::move(){
 	if (fabs(yetToMove) <= e){
         ready = true;
 		object->position = destiny;
+        
+        // notify Observers, once the movement is finished
+        this->notifyObservers();
     }else{
 		//Define diretion and velocity of movement
 		double deltaMove;
