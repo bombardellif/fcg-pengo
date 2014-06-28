@@ -23,7 +23,7 @@ public:
 
     template<typename T> std::pair<T, T> getNewPosition(T distance);
 
-    std::pair<int, int> getNewCeilPosition(double distance);
+    std::pair<int, int> getNextLinearPosition(double distance);
 
     double getNewDirection(double turn);
 

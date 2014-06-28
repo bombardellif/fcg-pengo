@@ -13,7 +13,7 @@ private:
 public:
 	LinearMovement(Movable* object, std::pair<double,double> destiny, bool forward);
 	LinearMovement(Movable* object, std::pair<double, double> destiny, bool forward, double speed);
-
+	
     void move();
 };
 #endif

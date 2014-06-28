@@ -64,11 +64,32 @@ template<typename T> std::pair<T, T> Movable::getNewPosition(T distance){
 template std::pair<int, int> Movable::getNewPosition<int>(int distance);
 template std::pair<double, double> Movable::getNewPosition<double>(double distance);
 
-std::pair<int, int> Movable::getNewCeilPosition(double distance){
+/**
+ * Return the suposed next position of this object. Evaluating the discrete direction
+ * and the distance intended to move, the function return the new position discrete position.
+ * @param distance Distance performed, can be negative
+ * @return the discrete new position that this object would occupy
+ * @see Movable::getDiscreteDirection, Movable::getNewPosition
+ */
+std::pair<int, int> Movable::getNextLinearPosition(double distance){
 
     std::pair<double, double> newPosition = getNewPosition<double>(distance);
-	newPosition.first = newPosition.first < 0 ? -ceil(fabs(newPosition.first)) : ceil(newPosition.first);
-	newPosition.second = newPosition.second < 0 ? -ceil(fabs(newPosition.second)) : ceil(newPosition.second);
+	
+	//If the movement is rightwards or downwards, then take the ceil as next discrete position
+	if ((getDiscreteDirection() == RIGHT && distance > 0) ||
+			(getDiscreteDirection() == DOWN && distance > 0) ||
+			(getDiscreteDirection() == LEFT && distance < 0) ||
+			(getDiscreteDirection() == UP && distance < 0)){
+		
+		std::cout <<"CEILL*********"<< newPosition.first <<","<<newPosition.second<< std::endl;
+		newPosition.first = newPosition.first < 0 ? -ceil(fabs(newPosition.first)) : ceil(newPosition.first);
+		newPosition.second = newPosition.second < 0 ? -ceil(fabs(newPosition.second)) : ceil(newPosition.second);
+	}else{
+		//Otherwise it is going upwards or leftwards, newPosition is less than current. Use then floor
+		std::cout <<"FLOOR*********"<< newPosition.first <<","<<newPosition.second<< std::endl;
+		newPosition.first = newPosition.first < 0 ? -ceil(fabs(newPosition.first)) : floor(newPosition.first);
+		newPosition.second = newPosition.second < 0 ? -ceil(fabs(newPosition.second)) : floor(newPosition.second);
+	}
 	
     return newPosition;
 }

@@ -19,7 +19,6 @@ LinearMovement::LinearMovement(Movable* object, std::pair<double, double> destin
 {
 }
 
-
 void LinearMovement::move(){
 	
     std::pair<double, double> destinyInGL = gameController.translateMapToGL(destiny);
@@ -53,8 +52,7 @@ void LinearMovement::move(){
 		else
 			deltaMove = -speed;
 		
-        std::pair<int, int> nextPos = object->getNewCeilPosition(deltaMove); //Next integer position
-		std::cout << object->position.first <<","<<object->position.second << ">>"<< nextPos.first <<","<<nextPos.second<< std::endl;
+        std::pair<int, int> nextPos = object->getNextLinearPosition(deltaMove); //Next integer position
 		if (scenario.outOfMap(nextPos)){
 			//End of scenario
 			object->takeActionToColision(this, nextPos);
