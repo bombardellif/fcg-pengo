@@ -56,16 +56,19 @@ void LinearMovement::move(){
 		else
 			deltaMove = -speed;
 		
-        //If it has not finished moving yet, keep trying
-        std::pair<int, int> nextPos = object->getNewPosition<int>(deltaMove);
-        //Colision?
-        //if (!scenario.outOfMap(nextPos) && scenario.map[nextPos.first][nextPos.second] != NULL){
+        std::pair<int, int> nextPos = object->getNewCeilPosition(deltaMove); //Next integer position
+		std::cout << object->position.first <<","<<object->position.second << ">>"<< nextPos.first <<","<<nextPos.second<< std::endl;
+		if (scenario.outOfMap(nextPos)){
+			//End of scenario
+			object->takeActionToColision(this, nextPos);
+		}else if (scenario.map[nextPos.second][nextPos.first] != NULL){
             //Colision Occurred
-          //  gameController.takeActionToColision(object, nextPos);
-        //}else{
+			std::cout << "COlision" << object->position.first <<","<<object->position.second << ">>"<< nextPos.first <<","<<nextPos.second<< std::endl;
+			object->takeActionToColision(this, nextPos);
+        }else{
             //Normal exection, keep moving
             object->position = object->getNewPosition<double>(deltaMove);
-        //}
+        }
     }
 
 }

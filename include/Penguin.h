@@ -7,15 +7,18 @@
 #include "3DObject.h"
 #include "Modelable.h"
 
+
 class Penguin : public Movable, public Modelable
 {    
 public:
     Penguin(C3DObject* _model, std::pair<double, double> _position);
-    
+	
     virtual void draw();
     
     std::vector<double> getEyesPosition();
     
     std::vector<double> getFocusPosition();
+	
+	void takeActionToColision(Movement* movement, std::pair<int, int> desiredPosition);
 };
 #endif

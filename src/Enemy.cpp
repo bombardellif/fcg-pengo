@@ -11,6 +11,9 @@
 #include "LinearMovement.h"
 #include "AngularMovement.h"
 #include "utils.h"
+#include "Scenario.h"
+
+extern Scenario scenario;
 
 extern GameController gameController;
 
@@ -103,3 +106,9 @@ Movement* Enemy::makeMovement(const Penguin& pengo)
     return newMove;
 }
 
+void Enemy::takeActionToColision(Movement* movement, std::pair<int, int> desiredPosition)
+{
+	if (scenario.outOfMap(desiredPosition)){
+		movement->ready = false;
+	}
+}

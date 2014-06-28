@@ -1,4 +1,4 @@
-#include "Scenario.h"
+	#include "Scenario.h"
 
 #include <cstdlib>
 #include <string>
@@ -30,8 +30,9 @@ Scenario::~Scenario()
     for(int i=0; i < SCENARIO_MAP_SIZE; i++) {
         for(int j=0; j < SCENARIO_MAP_SIZE; j++) {
             
-            if (map[i][j])
-                free(map[i][j]);
+            if (map[i][j]){
+				delete map[i][j];
+			}
         }
     }
 }
@@ -86,7 +87,7 @@ void Scenario::initMap()
                 map[row][col] = new Block(obj, std::pair<double,double>((double)col, (double)row), Item(), false);
                 break;
             case SCENARIO_MAP_COLOR_BLOCK:
-                
+				
                 obj = new C3DObject();
                 obj->Load((this->resourceFolder + SCENARIO_BLOCK_FILENAME).c_str());
                 
@@ -279,8 +280,9 @@ void Scenario::updateWindow(int windowWidth, int windowHeight)
     //this->updateCamera();
 }
 
-//@TODO: Fazer
 bool Scenario::outOfMap(std::pair<int, int> position){
+	return position.first < 0 || position.first >= SCENARIO_MAP_SIZE
+			|| position.second < 0 || position.second >= SCENARIO_MAP_SIZE;
 }
 
 std::vector< std::pair<int,int> > Scenario::getFreeMapPositions()
@@ -314,6 +316,7 @@ Penguin* Scenario::createPenguinAt(int row, int col)
     C3DObject* obj = new C3DObject();
     obj->Load((this->resourceFolder + SCENARIO_PENGUIN_FILENAME).c_str());
     
-    map[row][col] = this->penguin = new Penguin(obj, std::pair<double, double>(col,row));
+	map[row][col] = new Penguin(obj, std::pair<double, double>(col,row));
+    this->penguin = (Penguin*)map[row][col];
     return this->penguin;
 }

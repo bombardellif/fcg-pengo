@@ -1,6 +1,8 @@
 #ifndef MOVEMENT_H
 #define MOVEMENT_H
 
+class Movement;
+
 #include "Movable.h"
 #include "Observable.h"
 
@@ -8,7 +10,7 @@
 
 class Movement: public Observable
 {
-protected:
+public:
 	Movable* object;
     double speed;
     bool ready;
