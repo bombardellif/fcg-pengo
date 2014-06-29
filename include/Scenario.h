@@ -11,6 +11,7 @@
 #include "Modelable.h"
 #include "Penguin.h"
 #include "Enemy.h"
+#include "Block.h"
 
 #define SCENARIO_CAMERA_TP 0
 #define SCENARIO_CAMERA_FP 1
@@ -28,6 +29,7 @@
 #define SCENARIO_MAP_COLOR_ENEMY 0x00FF0000
 #define SCENARIO_ENEMY_FILENAME "bee.obj"
 #define SCENARIO_PENGUIN_FILENAME "penguin.obj"
+#define SCENARIO_ITEM_FILENAME "20facestar.obj"
 
 class Scenario
 {
@@ -54,6 +56,8 @@ private:
 public:
 	Modelable* map[SCENARIO_MAP_SIZE][SCENARIO_MAP_SIZE];
     
+    std::vector<Block*> movableBlocks;
+    
     Penguin* penguin;
 
 	int cameraState;
@@ -75,5 +79,7 @@ public:
     Enemy* createEnemyAt(int row, int col);
     
     Penguin* createPenguinAt(int row, int col);
+    
+    Item* createItemAt(int row, int col);
 };
 #endif
