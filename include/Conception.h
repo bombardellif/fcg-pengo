@@ -4,7 +4,7 @@
 #include "Block.h"
 #include "Modelable.h"
 
-class Conception: Modelable
+class Conception: public Modelable, public Movable
 {
 private:
 	int currentStep;
@@ -13,13 +13,9 @@ public:
 	Block* block;
 
 	int numSteps;
-	
-	C3DObject* model;
-	
-	std::pair<int, int> position;
 
 public:
-	Conception(Block* block, int numSteps, C3DObject* model, std::pair<int, int> position);
+	Conception(Block* block, int numSteps, C3DObject* model, std::pair<double, double> position);
 
 	void step();
 	
@@ -27,5 +23,6 @@ public:
 	
 	virtual void draw();
 
+    virtual void makeMovementInMap(Movement* movement, double deltaMove) {};
 };
 #endif

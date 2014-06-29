@@ -1,4 +1,4 @@
-	#include "Scenario.h"
+#include "Scenario.h"
 
 #include <cstdlib>
 #include <string>
@@ -113,7 +113,7 @@ void Scenario::initLight()
 	GLfloat light_ambient[] = { backgrundColor[0], backgrundColor[1], backgrundColor[2], backgrundColor[3] };
 	GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
 	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat light_position1[] = {SCENARIO_MAP_SIZE/2.0, SCENARIO_MAP_SIZE, SCENARIO_MAP_SIZE/2.0, 0.0};
+	GLfloat light_position1[] = {SCENARIO_MAP_SIZE/2.0, 4.0, SCENARIO_MAP_SIZE/2.0, 0.0};
 
     // Light 0
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
@@ -339,7 +339,7 @@ Conception* Scenario::createConceptionAt(int row, int col, int numSteps)
 	Block* newBlock = new Block(obj, std::pair<double,double>((double)col, (double)row), NULL, true);
 	
 	C3DObject* conceptionObj = new C3DObject();
-    obj->Load((this->resourceFolder + SCENARIO_CONCEPTION_FILENAME).c_str());
+    conceptionObj->Load((this->resourceFolder + SCENARIO_CONCEPTION_FILENAME).c_str());
 
 	Conception* newConception = new Conception(newBlock, numSteps, 
 			conceptionObj, std::pair<double,double>((double)col, (double)row));

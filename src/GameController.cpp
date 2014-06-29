@@ -101,8 +101,8 @@ void GameController::update()
         //If the conception is over, conceives it or cancels it
         if (current->isReady()){
 			//If the place is clean, puts the new block there
-			if (scenario.map[current->position.second][current->position.first] == NULL){
-				scenario.map[current->position.second][current->position.first] = (Modelable*)(current->block);
+			if (scenario.map[(int)current->position.second][(int)current->position.first] == NULL){
+				scenario.map[(int)current->position.second][(int)current->position.first] = (Modelable*)(current->block);
 				it = scenario.conceptions.erase(it);
 			}else{
 				it = scenario.conceptions.erase(it);				

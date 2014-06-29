@@ -11,6 +11,6 @@ public:
 	
 	void makeMovementInMap(Movement* movement, double deltaMove){}
 	
-	void draw(){}
+	virtual void draw();
 };
 #endif
