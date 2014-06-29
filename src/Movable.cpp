@@ -81,12 +81,10 @@ std::pair<int, int> Movable::getNextLinearPosition(double distance){
 			(getDiscreteDirection() == LEFT && distance < 0) ||
 			(getDiscreteDirection() == UP && distance < 0)){
 		
-		std::cout <<"CEILL*********"<< newPosition.first <<","<<newPosition.second<< std::endl;
 		newPosition.first = newPosition.first < 0 ? -ceil(fabs(newPosition.first)) : ceil(newPosition.first);
 		newPosition.second = newPosition.second < 0 ? -ceil(fabs(newPosition.second)) : ceil(newPosition.second);
 	}else{
 		//Otherwise it is going upwards or leftwards, newPosition is less than current. Use then floor
-		std::cout <<"FLOOR*********"<< newPosition.first <<","<<newPosition.second<< std::endl;
 		newPosition.first = newPosition.first < 0 ? -ceil(fabs(newPosition.first)) : floor(newPosition.first);
 		newPosition.second = newPosition.second < 0 ? -ceil(fabs(newPosition.second)) : floor(newPosition.second);
 	}

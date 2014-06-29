@@ -55,18 +55,8 @@ void LinearMovement::move(){
 		else
 			deltaMove = -speed;
 		
-        std::pair<int, int> nextPos = object->getNextLinearPosition(deltaMove); //Next integer position
-		if (scenario.outOfMap(nextPos)){
-			//End of scenario
-			object->takeActionToColision(this, nextPos);
-		}else if (scenario.map[nextPos.second][nextPos.first] != NULL){
-            //Colision Occurred
-			std::cout << "COlision" << object->position.first <<","<<object->position.second << ">>"<< nextPos.first <<","<<nextPos.second<< std::endl;
-			object->takeActionToColision(this, nextPos);
-        }else{
-            //Normal exection, keep moving
-            object->position = object->getNewPosition<double>(deltaMove);
-        }
+		//Let the object define where to go and behavior in case of colision
+        object->takeActionToColision(this, deltaMove);
     }
 
 }

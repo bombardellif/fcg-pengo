@@ -19,6 +19,8 @@ public:
     
     std::vector<double> getFocusPosition();
 	
-	void takeActionToColision(Movement* movement, std::pair<int, int> desiredPosition);
+	void takeActionToColision(Movement* movement, double deltaMove);
+	
+	void die();
 };
 #endif

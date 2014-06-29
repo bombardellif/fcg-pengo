@@ -10,7 +10,7 @@
 //#define MAX_BLOCKING_MOVEMENTS 10
 //#define MAX_NORMAL_MOVEMENTS 50
 //#define MAX_ENEMIES 10
-#define GAMECONTROLLER_MIN_ENEMIES 4
+#define GAMECONTROLLER_MIN_ENEMIES 1
 #define GAMECONTROLLER_DEFAULT_PENGUIN_SPEED 0.25
 #define GAMECONTROLLER_DEFAULT_MAX_CONCEIVING_BLOCKS 5
 #define GAMECONTROLLER_NUM_CAMERAS 3
@@ -55,8 +55,8 @@ public:
 	void update();
 	void interpretBlockableCommand();
 	void interpretNonBlockableCommand();
-	void moveEnemy(const Enemy& enemy);
 	std::pair<double, double> translateMapToGL(std::pair<int, int> mapCoordinate);
-	void takeActionToColision(Movement* movement, std::pair<int, int> desiredPosition);
+	void endMatch();
+	void kill(Enemy* enemy);
 };
 #endif

@@ -12,6 +12,8 @@
 #include "AngularMovement.h"
 #include "utils.h"
 #include "Scenario.h"
+#include "Block.h"
+#include <cassert>
 
 extern Scenario scenario;
 
@@ -106,9 +108,64 @@ Movement* Enemy::makeMovement(const Penguin& pengo)
     return newMove;
 }
 
-void Enemy::takeActionToColision(Movement* movement, std::pair<int, int> desiredPosition)
+
+void Enemy::takeActionToColision(Movement* movement, double deltaMove)
 {
+	std::pair<int, int> desiredPosition = getNextLinearPosition(deltaMove); //Next integer position
+	
+	//If intends to go outside the map. End of scenario
 	if (scenario.outOfMap(desiredPosition)){
-		movement->ready = false;
+		//Stop
+		movement->ready = true;
+		this->inMovement = false;
+		
+	}else if (scenario.map[desiredPosition.second][desiredPosition.first] != NULL
+			&& scenario.map[desiredPosition.second][desiredPosition.first] != (Modelable*)this) {
+		//Here, there is something on the way. Colided with something
+		
+		Modelable* other = scenario.map[desiredPosition.second][desiredPosition.first];
+		//If colided with a block
+		if (dynamic_cast<Block*>(other)){
+			//Just stop
+			movement->ready = true;
+			this->inMovement = false;
+			
+		}else if (dynamic_cast<Item*>(other)){
+			//Collided with an Item 
+			movement->ready = true;
+			this->inMovement = false;
+			
+		}else if (dynamic_cast<Enemy*>(other)){
+			//Collided with an Enemy
+			movement->ready = true;
+			this->inMovement = false;
+			
+		}else if (dynamic_cast<Penguin*>(other)){
+			//Collided with penguin
+			movement->ready = true;
+			this->inMovement = false;
+			
+			gameController.endMatch();
+		}
+		
+	}else{
+		//Normal exection, keep moving
+		
+		Modelable* other = scenario.map[desiredPosition.second][desiredPosition.first];
+		//If hasn't put this object in the next position, then it's the first move. So, put it
+		if (other != (Modelable*)this){
+			//free the old position
+			scenario.map[(int)position.second][(int)position.first] = NULL;
+			//place itself in the next position
+			scenario.map[desiredPosition.second][desiredPosition.first] = this;
+		}
+		
+        position = getNewPosition<double>(deltaMove);
+		
 	}
+}
+
+void Enemy::die()
+{
+	scenario.map[(int)position.second][(int)position.first] = NULL;
 }

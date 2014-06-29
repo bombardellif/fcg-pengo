@@ -129,11 +129,31 @@ void GameController::interpretBlockableCommand(){
             
             Block* block = dynamic_cast<Block*>(scenario.map[frontPosition.second][frontPosition.first]);
             if (block != NULL && block->mobile){ //It is a mobile block
-				//Push it to the bounds
-				block->direction = penguin->direction;
-				std::pair<int, int> blockDestiny = penguin->getNewPosition<int>(SCENARIO_MAP_SIZE+1);				
-				LinearMovement* newBlockMove = new LinearMovement(block, blockDestiny, true);
-                normalMovements.push_back(newBlockMove);
+				
+				std::pair<int, int> twoPosAway = penguin->getNewPosition<int>(2);
+				//If it is a push towards the wall, destroy the block
+				if (scenario.outOfMap(twoPosAway)){
+					//Destroy it
+					block->die();
+					delete block;
+					block = NULL;
+						
+				}else if (scenario.map[twoPosAway.second][twoPosAway.first] != NULL){
+					//If there is another block in front of this one...
+					Modelable* other = scenario.map[twoPosAway.second][twoPosAway.first];
+					if (dynamic_cast<Block*>(other)){
+						//Destroy it
+						block->die();
+						delete block;
+						block = NULL;
+					}
+				}else{
+					//The way is free, push it to the bounds
+					block->direction = penguin->direction;
+					std::pair<int, int> blockDestiny = penguin->getNewPosition<int>(SCENARIO_MAP_SIZE+1);
+					LinearMovement* newBlockMove = new LinearMovement(block, blockDestiny, true);
+					normalMovements.push_back(newBlockMove);
+				}
             }
         }
     }
@@ -148,9 +168,21 @@ void GameController::interpretNonBlockableCommand(){
 		scenario.cameraState = (scenario.cameraState + 1) % GAMECONTROLLER_NUM_CAMERAS;
 }
 
-void GameController::moveEnemy(const Enemy& enemy){
-}
-
 std::pair<double, double> GameController::translateMapToGL(std::pair<int, int> mapCoordinate){
 	return (std::pair<double, double>)(mapCoordinate);
+}
+
+void GameController::endMatch()
+{
+	penguin->die();
+	//delete penguin;
+	//penguin = NULL;
+	
+	//@TODO: Program action to end game (message, etc)
+}
+
+void GameController::kill(Enemy* enemy)
+{
+	enemy->die();
+	//@TODO: Delete enemy, take it out from queue or whatever
 }

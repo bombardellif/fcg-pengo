@@ -6,7 +6,7 @@
 
 class Modelable
 {
-private:
+protected:
     C3DObject* model;
 public:
     Modelable(C3DObject* _model);

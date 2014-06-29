@@ -84,14 +84,14 @@ void Scenario::initMap()
                 obj = new C3DObject();
                 obj->Load((this->resourceFolder + SCENARIO_IMBLOCK_FILENAME).c_str());
                 
-                map[row][col] = new Block(obj, std::pair<double,double>((double)col, (double)row), Item(), false);
+                map[row][col] = new Block(obj, std::pair<double,double>((double)col, (double)row), NULL, false);
                 break;
             case SCENARIO_MAP_COLOR_BLOCK:
 				
                 obj = new C3DObject();
                 obj->Load((this->resourceFolder + SCENARIO_BLOCK_FILENAME).c_str());
                 
-                map[row][col] = new Block(obj, std::pair<double,double>((double)col, (double)row), Item(), true);
+                map[row][col] = new Block(obj, std::pair<double,double>((double)col, (double)row), NULL, true);
                 break;
             default:
                 map[row][col] = NULL;

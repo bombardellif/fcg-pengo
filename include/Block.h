@@ -9,21 +9,23 @@
 class Block : public Movable, public Modelable
 {
 public:
-	Item item;
+	Item* item;
 
 	bool mobile;
 
 
 public:
-	Block(C3DObject* _model, std::pair<double, double> _position, Item item, bool mobile);
+	Block(C3DObject* _model, std::pair<double, double> _position, Item* item, bool mobile);
 
     virtual void draw();
 	
-	void takeActionToColision(Movement* movement, std::pair<int, int> desiredPosition);
+	void takeActionToColision(Movement* movement, double deltaMove);
     
 	void conceive();
 
 	void materialize();
+	
+	void die();
 
 };
 #endif

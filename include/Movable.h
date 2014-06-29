@@ -29,7 +29,7 @@ public:
 
     DiscreteDirection getDiscreteDirection();
 	
-	virtual void takeActionToColision(Movement* movement, std::pair<int, int> desiredPosition) = 0;
+	virtual void takeActionToColision(Movement* movement, double deltaMove) = 0;
 };
 
 #endif

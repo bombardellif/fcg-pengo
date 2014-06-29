@@ -21,10 +21,12 @@ public:
     
     virtual void draw();
 	
-	void takeActionToColision(Movement* movement, std::pair<int, int> desiredPosition);
+	void takeActionToColision(Movement* movement, double deltaMove);
 
     virtual void notify();
     
     Movement* makeMovement(const Penguin &pengo);
+	
+	void die();
 };
 #endif
