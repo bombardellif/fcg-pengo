@@ -11,6 +11,7 @@
 #include "Modelable.h"
 #include "Penguin.h"
 #include "Enemy.h"
+#include "Conception.h"
 
 #define SCENARIO_CAMERA_TP 0
 #define SCENARIO_CAMERA_FP 1
@@ -28,6 +29,7 @@
 #define SCENARIO_MAP_COLOR_ENEMY 0x00FF0000
 #define SCENARIO_ENEMY_FILENAME "bee.obj"
 #define SCENARIO_PENGUIN_FILENAME "penguin.obj"
+#define SCENARIO_CONCEPTION_FILENAME "block.obj"
 
 class Scenario
 {
@@ -53,6 +55,8 @@ private:
     
 public:
 	Modelable* map[SCENARIO_MAP_SIZE][SCENARIO_MAP_SIZE];
+	
+	std::list<Conception*> conceptions;
     
     Penguin* penguin;
 
@@ -75,5 +79,7 @@ public:
     Enemy* createEnemyAt(int row, int col);
     
     Penguin* createPenguinAt(int row, int col);
+	
+	Conception* createConceptionAt(int row, int col, int numSteps);
 };
 #endif

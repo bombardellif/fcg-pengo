@@ -22,7 +22,7 @@ void Block::draw()
     Modelable::draw();
 }
 
-void Block::takeActionToColision(Movement* movement, double deltaMove)
+void Block::makeMovementInMap(Movement* movement, double deltaMove)
 {
 	std::pair<int, int> desiredPosition = getNextLinearPosition(deltaMove); //Next integer position
 	

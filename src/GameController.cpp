@@ -9,15 +9,22 @@
 #include "AngularMovement.h"
 #include "Scenario.h"
 #include "Block.h"
+#include "Conception.h"
 #include <iostream>
 
 extern Scenario scenario;
 
-GameController::GameController(Penguin* penguin): penguinSpeed(GAMECONTROLLER_DEFAULT_PENGUIN_SPEED), maxConceivingBlocks(GAMECONTROLLER_DEFAULT_MAX_CONCEIVING_BLOCKS), penguin(penguin)
+GameController::GameController(Penguin* penguin):
+penguinSpeed(GAMECONTROLLER_DEFAULT_PENGUIN_SPEED), 
+maxConceivingBlocks(GAMECONTROLLER_DEFAULT_MAX_CONCEIVING_BLOCKS), 
+penguin(penguin)
 {
 }
 
-GameController::GameController(): penguinSpeed(GAMECONTROLLER_DEFAULT_PENGUIN_SPEED), maxConceivingBlocks(GAMECONTROLLER_DEFAULT_MAX_CONCEIVING_BLOCKS), penguin(NULL)
+GameController::GameController():
+penguinSpeed(GAMECONTROLLER_DEFAULT_PENGUIN_SPEED),
+maxConceivingBlocks(GAMECONTROLLER_DEFAULT_MAX_CONCEIVING_BLOCKS),		
+penguin(NULL)
 {
 }
 
@@ -50,8 +57,7 @@ void GameController::init()
 }
 
 void GameController::update()
-{
-    
+{	
     //If there is no movements in action blocking the user input, then treat their input
     if (blockingMovements.empty()){
         interpretBlockableCommand();
@@ -88,7 +94,23 @@ void GameController::update()
         }
     }
     
-    //@TODO: Iterate in conceptions
+    //Update Conceptions
+	for (std::list<Conception*>::iterator it=scenario.conceptions.begin(); it != scenario.conceptions.end(); ++it){
+		Conception* current = (*it);
+        current->step();
+        //If the conception is over, conceives it or cancels it
+        if (current->isReady()){
+			//If the place is clean, puts the new block there
+			if (scenario.map[current->position.second][current->position.first] == NULL){
+				scenario.map[current->position.second][current->position.first] = (Modelable*)(current->block);
+				it = scenario.conceptions.erase(it);
+			}else{
+				it = scenario.conceptions.erase(it);				
+				delete current;
+				current = NULL;
+			}
+        }
+	}
     
     //Check for new commands, that don't get blocked
     interpretNonBlockableCommand();
@@ -159,7 +181,11 @@ void GameController::interpretBlockableCommand(){
     }
 	
 	//Create new Block
-	//if(createNewBlockPressed)
+	if(createnewBlockPressed){
+		std::pair<int, int> nextPosition = penguin->getNewPosition<int>(1);
+		if (scenario.conceptions.size() < maxConceivingBlocks)
+			scenario.createConceptionAt(nextPosition.second, nextPosition.first, GAMECONTROLLER_NUM_STEPS_CONCEPTION);
+	}
 }
 
 void GameController::interpretNonBlockableCommand(){

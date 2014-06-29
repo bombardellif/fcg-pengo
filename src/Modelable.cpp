@@ -1,5 +1,6 @@
 #include "Modelable.h"
 #include "3DObject.h"
+#include <iostream>
 
 Modelable::Modelable(C3DObject* _model)
 :model(_model)
@@ -9,7 +10,7 @@ Modelable::Modelable(C3DObject* _model)
 Modelable::~Modelable()
 {
     if (this->model)
-        free(this->model);
+		delete (this->model);
 }
 
 void Modelable::draw()

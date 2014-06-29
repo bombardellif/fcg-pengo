@@ -56,7 +56,7 @@ void LinearMovement::move(){
 			deltaMove = -speed;
 		
 		//Let the object define where to go and behavior in case of colision
-        object->takeActionToColision(this, deltaMove);
+        object->makeMovementInMap(this, deltaMove);
     }
 
 }

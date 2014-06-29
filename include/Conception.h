@@ -2,19 +2,30 @@
 #define CONCEPTION_H
 
 #include "Block.h"
+#include "Modelable.h"
 
-class Conception
+class Conception: Modelable
 {
 private:
-	Block block;
+	int currentStep;
+	
+public:
+	Block* block;
 
 	int numSteps;
-
+	
+	C3DObject* model;
+	
+	std::pair<int, int> position;
 
 public:
-	Conception(const Block& block, int numSteps);
+	Conception(Block* block, int numSteps, C3DObject* model, std::pair<int, int> position);
 
 	void step();
+	
+	bool isReady();
+	
+	virtual void draw();
 
 };
 #endif

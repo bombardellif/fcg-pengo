@@ -54,7 +54,7 @@ std::vector<double> Penguin::getFocusPosition()
     return result;
 }
 
-void Penguin::takeActionToColision(Movement* movement, double deltaMove)
+void Penguin::makeMovementInMap(Movement* movement, double deltaMove)
 {
 	std::pair<int, int> desiredPosition = getNextLinearPosition(deltaMove); //Next integer position
 	
