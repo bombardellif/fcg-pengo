@@ -19,7 +19,7 @@ public:
     
     std::vector<double> getFocusPosition();
 	
-	void takeActionToColision(Movement* movement, double deltaMove);
+	void makeMovementInMap(Movement* movement, double deltaMove);
 	
 	void die();
 };

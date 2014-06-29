@@ -109,7 +109,7 @@ Movement* Enemy::makeMovement(const Penguin& pengo)
 }
 
 
-void Enemy::takeActionToColision(Movement* movement, double deltaMove)
+void Enemy::makeMovementInMap(Movement* movement, double deltaMove)
 {
 	std::pair<int, int> desiredPosition = getNextLinearPosition(deltaMove); //Next integer position
 	

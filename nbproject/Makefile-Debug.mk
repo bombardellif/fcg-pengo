@@ -41,7 +41,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/Block.o \
 	${OBJECTDIR}/src/Conception.o \
 	${OBJECTDIR}/src/Enemy.o \
-	${OBJECTDIR}/src/EnemyInteligence.o \
 	${OBJECTDIR}/src/GameController.o \
 	${OBJECTDIR}/src/Item.o \
 	${OBJECTDIR}/src/LinearMovement.o \
@@ -112,11 +111,6 @@ ${OBJECTDIR}/src/Enemy.o: src/Enemy.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Enemy.o src/Enemy.cpp
-
-${OBJECTDIR}/src/EnemyInteligence.o: src/EnemyInteligence.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/EnemyInteligence.o src/EnemyInteligence.cpp
 
 ${OBJECTDIR}/src/GameController.o: src/GameController.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

@@ -19,7 +19,7 @@ public:
 
     virtual void draw();
 	
-	void takeActionToColision(Movement* movement, double deltaMove);
+	void makeMovementInMap(Movement* movement, double deltaMove);
     
 	void conceive();
 

@@ -6,6 +6,7 @@
 #include <GL/glu.h>
 #include <iostream>
 #include <utility>
+#include <cassert>
 #include "bitmap.h"
 #include "Block.h"
 #include "Enemy.h"
@@ -246,7 +247,16 @@ void Scenario::render()
                 glPopMatrix();
             }
         }
-    }
+    }	
+	//Render Conceptions
+	for (std::list<Conception*>::iterator it=conceptions.begin(); it != conceptions.end(); ++it){
+		Conception* current = (*it);
+		glPushMatrix();
+		
+        current->draw();
+		
+		glPopMatrix();
+	}
     glPopMatrix();
     
     this->renderFloor();
@@ -319,4 +329,22 @@ Penguin* Scenario::createPenguinAt(int row, int col)
 	map[row][col] = new Penguin(obj, std::pair<double, double>(col,row));
     this->penguin = (Penguin*)map[row][col];
     return this->penguin;
+}
+
+Conception* Scenario::createConceptionAt(int row, int col, int numSteps)
+{
+	C3DObject* obj = new C3DObject();
+	obj->Load((this->resourceFolder + SCENARIO_BLOCK_FILENAME).c_str());
+
+	Block* newBlock = new Block(obj, std::pair<double,double>((double)col, (double)row), NULL, true);
+	
+	C3DObject* conceptionObj = new C3DObject();
+    obj->Load((this->resourceFolder + SCENARIO_CONCEPTION_FILENAME).c_str());
+
+	Conception* newConception = new Conception(newBlock, numSteps, 
+			conceptionObj, std::pair<double,double>((double)col, (double)row));
+	
+	conceptions.push_back(newConception);
+	
+	return newConception;
 }
