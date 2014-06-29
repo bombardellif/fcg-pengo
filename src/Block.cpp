@@ -3,6 +3,7 @@
 #include "Scenario.h"
 #include "GameController.h"
 #include <cassert>
+#include <iostream>
 
 extern Scenario scenario;
 extern GameController gameController;
@@ -72,16 +73,12 @@ void Block::makeMovementInMap(Movement* movement, double deltaMove)
 	}
 }
 
-
-void Block::conceive()
-{
-}
-
-void Block::materialize()
-{
-}
-
 void Block::die()
 {
 	scenario.map[(int)position.second][(int)position.first] = NULL;
+	
+	if (item){
+		item->position = position;
+		scenario.map[(int)(position.second)][(int)(position.first)] = item;
+	}
 }

@@ -19,6 +19,9 @@
 
 #define SCENARIO_CENTER_TRANSLATION 0.5f
 
+#define SCENARIO_NUM_ITEMS_CONCEPT 1
+#define SCENARIO_NUM_ITEMS_SPPED 1
+
 #define SCENARIO_MAP_SIZE 16
 #define SCENARIO_MAP_FILENAME "map.bmp"
 #define SCENARIO_TEXTURE_FLOOR_FILENAME "groundTexture.bmp"
@@ -30,6 +33,7 @@
 #define SCENARIO_ENEMY_FILENAME "bee.obj"
 #define SCENARIO_PENGUIN_FILENAME "penguin.obj"
 #define SCENARIO_CONCEPTION_FILENAME "block.obj"
+#define SCENARIO_ITEM_FILENAME "block.obj"
 
 class Scenario
 {

@@ -212,3 +212,9 @@ void GameController::kill(Enemy* enemy)
 	enemy->die();
 	//@TODO: Delete enemy, take it out from queue or whatever
 }
+
+void GameController::kill(Item* item)
+{
+	item->die();
+	//@TODO: Delete enemy, take it out from queue or whatever
+}

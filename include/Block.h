@@ -20,10 +20,6 @@ public:
     virtual void draw();
 	
 	void makeMovementInMap(Movement* movement, double deltaMove);
-    
-	void conceive();
-
-	void materialize();
 	
 	void die();
 
