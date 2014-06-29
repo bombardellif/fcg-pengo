@@ -75,7 +75,10 @@ void Penguin::makeMovementInMap(Movement* movement, double deltaMove)
 			
 		}else if (dynamic_cast<Item*>(other)){
 			//Collided with an Item 
-			//@TODO
+			Item* item = dynamic_cast<Item*>(other);
+			item->actOnGame();
+			
+			gameController.kill(item);
 			
 		}else if (dynamic_cast<Enemy*>(other)){
 			//Collided with an Enemy

@@ -4,6 +4,7 @@
 #include "Penguin.h"
 #include "Enemy.h"
 #include "Movement.h"
+#include "Item.h"
 
 #include <list>
 
@@ -26,11 +27,10 @@ private:
 
 	std::list<Enemy*> enemies;
 
+public:
     double penguinSpeed;
 
     int maxConceivingBlocks;
-
-public:
 
 	bool goForwardPressed;
 
@@ -60,5 +60,6 @@ public:
 	std::pair<double, double> translateMapToGL(std::pair<int, int> mapCoordinate);
 	void endMatch();
 	void kill(Enemy* enemy);
+	void kill(Item* item);
 };
 #endif
