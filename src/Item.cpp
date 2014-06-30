@@ -32,11 +32,12 @@ void Item::actOnGame(){
 	if (kind == ITEM_KIND_PLUS_CONCEPTION){
 		gameController.maxConceivingBlocks++;
 	}else if (kind == ITEM_KIND_PLUS_SPEED){
-		gameController.penguinSpeed += 0.5;
-		assert(gameController.penguinSpeed <= 1);
+		gameController.penguinSpeed += 0.25;
+        if (gameController.penguinSpeed > 1.0f)
+            gameController.penguinSpeed = 1.0f;
+		assert(gameController.penguinSpeed <= 1.0f);
 	}else{
 		assert(false); //Not implemented this kind. Should it? Then develop here
 	}
-	std::cout <<"die"<< (int)position.second <<","<<(int)position.first<<std::endl;
 	scenario.map[(int)position.second][(int)position.first] = NULL;
 }

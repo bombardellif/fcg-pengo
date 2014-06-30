@@ -89,7 +89,7 @@ public:
     
     Penguin* createPenguinAt(int row, int col);
     
-    Item* createItemInsideBlockAt(int row, int col);
+    Item* createItemInsideBlockAt(int row, int col, int itemKind);
 	
 	Conception* createConceptionAt(int row, int col, int numSteps);
     

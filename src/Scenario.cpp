@@ -316,8 +316,10 @@ std::vector<std::pair<int,int> > Scenario::getMobileBlockPositions()
     for(int i=0; i < SCENARIO_MAP_SIZE; i++) {
         for(int j=0; j < SCENARIO_MAP_SIZE; j++) {
             
+            Block* block;
             if ((map[i][j])
-            && (dynamic_cast<Block*>(map[i][j])))
+            && (block = dynamic_cast<Block*>(map[i][j]))
+            && (block->mobile))
                 result.push_back(std::pair<int,int>(i, j));
         }
     }
@@ -346,7 +348,7 @@ Penguin* Scenario::createPenguinAt(int row, int col)
     return this->penguin;
 }
 
-Item* Scenario::createItemInsideBlockAt(int row, int col)
+Item* Scenario::createItemInsideBlockAt(int row, int col, int itemKind)
 {
     Item* newItem = NULL;
     if (map[row][col]) {
@@ -355,7 +357,7 @@ Item* Scenario::createItemInsideBlockAt(int row, int col)
         C3DObject* obj = new C3DObject();
         obj->Load((this->resourceFolder + SCENARIO_ITEM_FILENAME).c_str());
 
-        newItem = new Item(obj, blockWithItem->position, ITEM_KIND_PLUS_SPEED);
+        newItem = new Item(obj, blockWithItem->position, itemKind);
         blockWithItem->item = newItem;
     }
     
