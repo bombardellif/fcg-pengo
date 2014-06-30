@@ -18,7 +18,7 @@ mobile(mobile)
 
 void Block::draw()
 {
-	glTranslatef((GLfloat)position.first, 1.0, (GLfloat)position.second);
+	glTranslatef((GLfloat)position.first, 0.5, (GLfloat)position.second);
     glScalef(0.5, 0.5, 0.5);
     Modelable::draw();
 }

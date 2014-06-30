@@ -9,7 +9,7 @@
 #include "Observable.h"
 
 #define ENEMY_DISTANCE_LOOK_PENGUIN 4.0
-#define ENEMEY_SPEED 0.5
+#define ENEMEY_SPEED 0.25
 
 class Enemy : public Movable, public Modelable, public Observer
 {

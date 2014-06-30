@@ -22,7 +22,7 @@
 #include <iostream>
 
 #define APP_NAME "FCG - Pengo"
-#define SLEEP_MS 5
+#define SLEEP_MS 30
 #define SLEEP_uS SLEEP_MS * 1000
 #define GO_FORWARD_KEY 'w'
 #define GO_BACKWARDS_KEY 's'
@@ -130,11 +130,27 @@ void onKeyUp(unsigned char key, int x, int y) {
 /**
  * Render scene
 */
-void mainRender() {	
-	gameController.update();
+void mainRender() {
+    gameController.update();
+    
+    glViewport(0, 0, windowWidth, windowHeight);
+    glDisable(GL_SCISSOR_TEST);
+    glDepthRange(0.1, 1.0);
 	scenario.render();
     
-	glFlush();
+    glViewport(windowWidth - windowWidth*0.2,
+            windowHeight - windowHeight*0.2,
+            windowWidth*0.2,
+            windowHeight*0.2);
+    glEnable(GL_SCISSOR_TEST);
+    glDepthRange(0.0, 0.1);
+    
+    int currentCameraState = scenario.cameraState;
+    scenario.cameraState = SCENARIO_CAMERA_OVER;
+	scenario.render();
+    scenario.cameraState = currentCameraState;
+    
+    glFlush();
 	glutPostRedisplay();
     
 	#  ifdef WIN32
@@ -150,7 +166,11 @@ Initialize
 void mainInit() {
     
     scenario.updateWindow(windowWidth, windowWidth);
-    glViewport(0, 0, windowWidth, windowHeight);
+    //glViewport(0, 0, windowWidth, windowHeight);
+    glScissor(windowWidth - windowWidth*0.2,
+            windowHeight - windowHeight*0.2,
+            windowWidth*0.2,
+            windowHeight*0.2);
     
     scenario.init();
     gameController.init();
