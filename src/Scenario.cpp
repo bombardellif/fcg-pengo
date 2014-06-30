@@ -70,8 +70,6 @@ void Scenario::initMap()
         throw std::string("Error loading map file: Invalid image size!");
     }
     
-	Block* mobileBlocks[SCENARIO_MAP_SIZE*SCENARIO_MAP_SIZE];
-	int totalMobileBlocks = 0;
     for(bitIndex = i = 0, size=SCENARIO_MAP_SIZE*SCENARIO_MAP_SIZE; i < size ; i++, bitIndex += 3)
     {
         row = i / SCENARIO_MAP_SIZE;
@@ -94,37 +92,11 @@ void Scenario::initMap()
                 obj->Load((this->resourceFolder + SCENARIO_BLOCK_FILENAME).c_str());
                 
                 map[row][col] = new Block(obj, std::pair<double,double>((double)col, (double)row), NULL, true);
-				//Keep mobile blocks in order to place items in them
-				mobileBlocks[totalMobileBlocks] = (Block*)map[row][col];
-				totalMobileBlocks++;
                 break;
             default:
                 map[row][col] = NULL;
         }
     }
-	
-	//Place items into blocks
-	srand(time(NULL));
-	for (int i = 0; i < SCENARIO_NUM_ITEMS_CONCEPT; i++){
-		int posInsert = rand() % totalMobileBlocks;
-		int j = posInsert;
-		do{
-			if (mobileBlocks[j] == NULL){
-				if(j+1 >= totalMobileBlocks)
-					j = 0;
-				else
-					j++;
-			}else{
-				C3DObject* obj = new C3DObject();
-				obj->Load((this->resourceFolder + SCENARIO_ITEM_FILENAME).c_str());
-				
-				Item* newItem = new Item(obj, mobileBlocks[j]->position, ITEM_KIND_PLUS_SPEED);
-				mobileBlocks[j]->item = newItem;
-				std::cout << mobileBlocks[j]->position.first <<","<< mobileBlocks[j]->position.second << std::endl;
-				break;
-			}
-		}while(j != posInsert);
-	}
     
     // finally
     free(bits);
@@ -337,6 +309,22 @@ std::vector< std::pair<int,int> > Scenario::getFreeMapPositions()
     return result;
 }
 
+std::vector<std::pair<int,int> > Scenario::getMobileBlockPositions()
+{
+    std::vector< std::pair<int,int> > result;
+    
+    for(int i=0; i < SCENARIO_MAP_SIZE; i++) {
+        for(int j=0; j < SCENARIO_MAP_SIZE; j++) {
+            
+            if ((map[i][j])
+            && (dynamic_cast<Block*>(map[i][j])))
+                result.push_back(std::pair<int,int>(i, j));
+        }
+    }
+    
+    return result;
+}
+
 Enemy* Scenario::createEnemyAt(int row, int col)
 {
     C3DObject* obj = new C3DObject();
@@ -356,6 +344,22 @@ Penguin* Scenario::createPenguinAt(int row, int col)
 	map[row][col] = new Penguin(obj, std::pair<double, double>(col,row));
     this->penguin = (Penguin*)map[row][col];
     return this->penguin;
+}
+
+Item* Scenario::createItemInsideBlockAt(int row, int col)
+{
+    Item* newItem = NULL;
+    if (map[row][col]) {
+        Block* blockWithItem = (Block*)map[row][col];
+        
+        C3DObject* obj = new C3DObject();
+        obj->Load((this->resourceFolder + SCENARIO_ITEM_FILENAME).c_str());
+
+        newItem = new Item(obj, blockWithItem->position, ITEM_KIND_PLUS_SPEED);
+        blockWithItem->item = newItem;
+    }
+    
+    return newItem;
 }
 
 Conception* Scenario::createConceptionAt(int row, int col, int numSteps)

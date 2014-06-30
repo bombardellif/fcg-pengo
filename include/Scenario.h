@@ -83,11 +83,13 @@ public:
     
     std::vector<std::pair<int,int> > getFreeMapPositions();
     
+    std::vector<std::pair<int,int> > getMobileBlockPositions();
+    
     Enemy* createEnemyAt(int row, int col);
     
     Penguin* createPenguinAt(int row, int col);
     
-    Item* createItemAt(int row, int col);
+    Item* createItemInsideBlockAt(int row, int col);
 	
 	Conception* createConceptionAt(int row, int col, int numSteps);
     
