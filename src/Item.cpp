@@ -1,6 +1,7 @@
 #include "Item.h"
 #include "Scenario.h"
 #include "GameController.h"
+#include "utils.h"
 
 #include <iostream>
 #include <cassert>
@@ -13,14 +14,13 @@ Movable(position),
 Modelable(model),
 kind(kind)
 {
-	
 }
 
 void Item::draw(){
 	glTranslatef((GLfloat)position.first, 1.0, (GLfloat)position.second);
-    //glScalef(0.75, 0.75, 0.75);
-    //glRotatef(radToDegree(this->direction + MODELABLE_OFFSET_DIRECAO_MODELO), 0.0, 1.0, 0.0);
-    Modelable::draw();
+    glScalef(0.5, 0.5, 0.5);
+    glRotatef(radToDegree(this->direction + MODELABLE_OFFSET_DIRECAO_MODELO), 0.0, 1.0, 0.0);
+    this->model->Draw(SMOOTH_MATERIAL);
 }
 
 void Item::die(){

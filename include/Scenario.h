@@ -11,6 +11,7 @@
 #include "Modelable.h"
 #include "Penguin.h"
 #include "Enemy.h"
+#include "Block.h"
 #include "Conception.h"
 
 #define SCENARIO_CAMERA_TP 0
@@ -32,8 +33,8 @@
 #define SCENARIO_MAP_COLOR_ENEMY 0x00FF0000
 #define SCENARIO_ENEMY_FILENAME "bee.obj"
 #define SCENARIO_PENGUIN_FILENAME "penguin.obj"
-#define SCENARIO_CONCEPTION_FILENAME "block.obj"
-#define SCENARIO_ITEM_FILENAME "block.obj"
+#define SCENARIO_ITEM_FILENAME "DIAMOND.obj"
+#define SCENARIO_CONCEPTION_FILENAME "star.obj"
 
 class Scenario
 {
@@ -62,6 +63,8 @@ public:
 	
 	std::list<Conception*> conceptions;
     
+    std::vector<Block*> movableBlocks;
+    
     Penguin* penguin;
 
 	int cameraState;
@@ -83,7 +86,11 @@ public:
     Enemy* createEnemyAt(int row, int col);
     
     Penguin* createPenguinAt(int row, int col);
+    
+    Item* createItemAt(int row, int col);
 	
 	Conception* createConceptionAt(int row, int col, int numSteps);
+    
 };
+
 #endif
