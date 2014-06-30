@@ -67,10 +67,14 @@ void GameController::init()
         
         std::pair<int,int> chosenBlockPos = mobileBlocksPos[randomPosition];
         
-        std::cout << chosenBlockPos.first << chosenBlockPos.second <<std::endl;
-        scenario.createItemInsideBlockAt(chosenBlockPos.first, chosenBlockPos.second);
+        if (i < (GAMECONTROLLER_MIN_ITEMS/2)) {
+            scenario.createItemInsideBlockAt(chosenBlockPos.first, chosenBlockPos.second, ITEM_KIND_PLUS_SPEED);
+        }
+        else {
+            scenario.createItemInsideBlockAt(chosenBlockPos.first, chosenBlockPos.second, ITEM_KIND_PLUS_CONCEPTION);
+        }
         
-        size--;
+        sizeBlocks--;
         mobileBlocksPos.erase(mobileBlocksPos.begin() + randomPosition);
     }
 }
