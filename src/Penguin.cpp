@@ -85,7 +85,7 @@ void Penguin::makeMovementInMap(Movement* movement, double deltaMove)
 			//Collided with an Enemy
 			movement->ready = true;
 			
-			gameController.endMatch();
+			gameController.endMatch(GAMECONTROLLER_STATE_LOSE);
 			
 		}else if (dynamic_cast<Penguin*>(other)){
 			assert (false); //There shouldn't be more than one penguin

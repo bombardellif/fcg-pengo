@@ -146,7 +146,7 @@ void Enemy::makeMovementInMap(Movement* movement, double deltaMove)
 			movement->ready = true;
 			this->inMovement = false;
 			
-			gameController.endMatch();
+			gameController.endMatch(GAMECONTROLLER_STATE_LOSE);
 		}
 		
 	}else{

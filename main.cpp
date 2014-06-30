@@ -139,16 +139,83 @@ void onKeyUp(unsigned char key, int x, int y) {
 }
 
 /**
+ * Draw the result on screen (Win or lose)
+ */
+void drawFinalResult(){
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	gluOrtho2D(0,400,0,100);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glPushMatrix();
+
+	glPushMatrix();
+		glColor3f(0.0,0.0,0.0);
+		glLineWidth(20.0);
+		glTranslatef(0.0, 5.0, 0.0);
+		glScalef(0.48, 0.9, 1.0);
+		
+		if (gameController.gameState == GAMECONTROLLER_STATE_WIN){
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, 'Y');
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, 'O');
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, 'U');
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, ' ');
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, 'W');
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, 'I');
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, 'N');
+			//glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, 'E');
+		}else if (gameController.gameState == GAMECONTROLLER_STATE_LOSE){
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, 'Y');
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, 'O');
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, 'U');
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, ' ');
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, 'L');
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, '0');
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, 'S');
+			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, 'E');
+		}
+	glPopMatrix();
+
+	glBegin(GL_QUADS);
+		glColor3f(1.0,0.53,0.0);
+
+		glVertex2f(0.0, 0.0);
+		glVertex2f(400.0, 0.0);
+		glVertex2f(400.0, 100.0);
+		glVertex2f(0.0, 100.0);
+	glEnd();
+
+	glPopMatrix();
+}
+
+/**
  * Render scene
 */
 void mainRender() {
     gameController.update();
     
+	//////////// Game Main ViewPort
     glViewport(0, 0, windowWidth, windowHeight);
     glDisable(GL_SCISSOR_TEST);
-    glDepthRange(0.1, 1.0);
+    glDepthRange(0.2, 1.0);
+	scenario.updateWindow(windowWidth, windowHeight);
 	scenario.render();
-    
+	
+	if (gameController.gameState != GAMECONTROLLER_STATE_PLAYING){
+		//////////// Message ViewPort
+		glViewport(0.0, (windowHeight/3), windowWidth, (windowHeight/3));
+		glDisable(GL_SCISSOR_TEST);
+		glDepthRange(0.1, 0.2);
+		glDisable(GL_LIGHTING );
+		
+		drawFinalResult();
+		
+		glEnable(GL_LIGHTING );
+	}
+	
+	//////////// Minimap ViewPort
     glViewport(windowWidth - windowWidth*0.2,
             windowHeight - windowHeight*0.2,
             windowWidth*0.2,
@@ -158,6 +225,7 @@ void mainRender() {
     
     int currentCameraState = scenario.cameraState;
     scenario.cameraState = SCENARIO_CAMERA_OVER;
+	scenario.updateWindow(windowWidth, windowHeight);
 	scenario.render();
     scenario.cameraState = currentCameraState;
     

@@ -16,6 +16,10 @@
 #define GAMECONTROLLER_LOOPS_PER_SECOND 15
 #define GAMECONTROLLER_NUM_STEPS_CONCEPTION GAMECONTROLLER_LOOPS_PER_SECOND * 2
 
+#define GAMECONTROLLER_STATE_PLAYING 0
+#define GAMECONTROLLER_STATE_WIN 1
+#define GAMECONTROLLER_STATE_LOSE 2
+
 class GameController
 {
 private:
@@ -28,7 +32,7 @@ private:
 public:
     double penguinSpeed;
 
-    int maxConceivingBlocks;
+    unsigned int maxConceivingBlocks;
 
 	bool goForwardPressed;
 
@@ -45,6 +49,8 @@ public:
 	bool createnewBlockPressed;
 
 	Penguin* penguin;
+	
+	int gameState;
     
 
 public:
@@ -56,8 +62,9 @@ public:
 	void interpretBlockableCommand();
 	void interpretNonBlockableCommand();
 	std::pair<double, double> translateMapToGL(std::pair<int, int> mapCoordinate);
-	void endMatch();
+	void endMatch(int state);
 	void kill(Enemy* enemy);
 	void kill(Item* item);
+	void refreshGameState();
 };
 #endif
