@@ -24,7 +24,6 @@ void Item::draw(){
 }
 
 void Item::die(){
-	std::cout <<"die"<< (int)position.second <<","<<(int)position.first<<std::endl;
 	scenario.map[(int)position.second][(int)position.first] = NULL;
 }
 

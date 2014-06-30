@@ -20,7 +20,6 @@ LinearMovement::LinearMovement(Movable* object, std::pair<double, double> destin
 }
 
 void LinearMovement::move(){
-
 	//If the movement is not over yet, then do it
     if (!isReady()){
 		std::pair<double, double> destinyInGL = gameController.translateMapToGL(destiny);
@@ -34,16 +33,16 @@ void LinearMovement::move(){
 
 		//Calculate how much yet to the end of movement
 		double yetToMove;
-		if (fabs(object->position.first - destinyInGL.first) <= e){
+		if (fabs(object->position.first - destinyInGL.first) < e){
 			//firsts are "equal"(near enough), we are changing the second (or the movement is done)
 			yetToMove = object->position.second - destinyInGL.second;
 		}else{
 			//Firsts are not equal, then get the remaining movement to perform
 			yetToMove = object->position.first - destinyInGL.first;
 		}
-
+		
 		//If there is no more movement to perform, then movement is ready
-		if (fabs(yetToMove) <= e){
+		if (fabs(yetToMove) < e){
 			ready = true;
 			object->position = destiny;
 

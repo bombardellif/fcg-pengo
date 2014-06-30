@@ -11,6 +11,7 @@
 #include <vector>
 #include <cmath>
 #include <cassert>
+#include <iostream>
 
 #define PENGUIN_OFFSET_DIRECAO_MODELO M_PI_2
 
