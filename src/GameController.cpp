@@ -160,22 +160,24 @@ void GameController::interpretBlockableCommand(){
 					delete block;
 					block = NULL;
 						
-				}else if (scenario.map[twoPosAway.second][twoPosAway.first] != NULL){
-					//If there is another block in front of this one...
-					Modelable* other = scenario.map[twoPosAway.second][twoPosAway.first];
-					if (dynamic_cast<Block*>(other)){
-						//Destroy it
-						block->die();
-						delete block;
-						block = NULL;
-					}
-				}else{
-					//The way is free, push it to the bounds
-					block->direction = penguin->direction;
-					std::pair<int, int> blockDestiny = penguin->getNewPosition<int>(SCENARIO_MAP_SIZE+1);
-					LinearMovement* newBlockMove = new LinearMovement(block, blockDestiny, true);
-					normalMovements.push_back(newBlockMove);
-				}
+				} else {
+                
+                    Modelable* other;
+                    //If there is another block in front of this one...
+                    if (((other = scenario.map[twoPosAway.second][twoPosAway.first]) != NULL)
+                    && (dynamic_cast<Block*>(other))) {
+                        //Destroy it
+                        block->die();
+                        delete block;
+                        block = NULL;
+                    } else {
+                        //The way is free, push it to the bounds
+                        block->direction = penguin->direction;
+                        std::pair<int, int> blockDestiny = penguin->getNewPosition<int>(SCENARIO_MAP_SIZE+1);
+                        LinearMovement* newBlockMove = new LinearMovement(block, blockDestiny, true);
+                        normalMovements.push_back(newBlockMove);
+                    }
+                }
             }
         }
     }

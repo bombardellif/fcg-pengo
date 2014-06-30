@@ -17,7 +17,7 @@ kind(kind)
 }
 
 void Item::draw(){
-	glTranslatef((GLfloat)position.first, 1.0, (GLfloat)position.second);
+	glTranslatef((GLfloat)position.first, 0.5, (GLfloat)position.second);
     glScalef(0.5, 0.5, 0.5);
     glRotatef(radToDegree(this->direction + MODELABLE_OFFSET_DIRECAO_MODELO), 0.0, 1.0, 0.0);
     this->model->Draw(SMOOTH_MATERIAL);

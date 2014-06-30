@@ -80,7 +80,6 @@ void Scenario::initMap()
         // interpret the RGB pixel (3 bytes) as an RGBA pixel (4 bytes)
         pixel = *((GLuint*)(bits+bitIndex)) & 0x00ffffff;
         
-        // TODO: instanciate the models according to the bitmap
         switch (pixel) {
             case SCENARIO_MAP_COLOR_IMBLOCK:
                 
@@ -177,28 +176,28 @@ void Scenario::renderFloor()
 
     glColor4f(1.0f,1.0f,1.0f,1.0f);
     int xQuads = SCENARIO_MAP_SIZE * SCENARIO_MAP_SIZE;
-    for (int i = 0; i < xQuads; i++) {
-        for (int j = 0; j < xQuads; j++) {
+//    for (int i = 0; i < xQuads; i++) {
+//        for (int j = 0; j < xQuads; j++) {
             glBegin(GL_QUADS);
                 glTexCoord2f(1.0f, 0.0f);   // coords for the texture
                 glNormal3f(0.0f,1.0f,0.0f);
-                glVertex3f(i * (float)planeSize/xQuads, 0.0f, (j+1) * (float)planeSize/xQuads);
+                glVertex3f(planeSize, 0.0f, 0.0f);
 
                 glTexCoord2f(0.0f, 0.0f);  // coords for the texture
                 glNormal3f(0.0f,1.0f,0.0f);
-                glVertex3f((i+1) * (float)planeSize/xQuads, 0.0f, (j+1) * (float)planeSize/xQuads);
+                glVertex3f(0.0f, 0.0f, 0.0f);
 
                 glTexCoord2f(0.0f, 1.0f);  // coords for the texture
                 glNormal3f(0.0f,1.0f,0.0f);
-                glVertex3f((i+1) * (float)planeSize/xQuads, 0.0f, j * (float)planeSize/xQuads);
+                glVertex3f(0.0f, 0.0f, planeSize);
 
                 glTexCoord2f(1.0f, 1.0f);  // coords for the texture
                 glNormal3f(0.0f,1.0f,0.0f);
-                glVertex3f(i * (float)planeSize/xQuads, 0.0f, j * (float)planeSize/xQuads);
+                glVertex3f(planeSize, 0.0f, planeSize);
 
             glEnd();
-        }
-    }
+//        }
+//    }
 
 	glDisable(GL_TEXTURE_2D);
 
@@ -216,10 +215,10 @@ void Scenario::updateCamera()
     
     switch(this->cameraState) {
         case SCENARIO_CAMERA_TP:
-            backPosition = this->penguin->getNewPosition<double>(-2.0);
+            backPosition = this->penguin->getNewPosition<double>(-2.5);
             
             gluLookAt(backPosition.first + SCENARIO_CENTER_TRANSLATION,
-                eyesPosition[1] + 0.5,
+                eyesPosition[1] + 1.7,
                 backPosition.second + SCENARIO_CENTER_TRANSLATION,
                 focusPosition[0] + SCENARIO_CENTER_TRANSLATION,
                 focusPosition[1],
@@ -240,9 +239,9 @@ void Scenario::updateCamera()
                 0.0);
             break;
         case SCENARIO_CAMERA_OVER:
-            GLfloat mapCenter = SCENARIO_MAP_SIZE/2.0f;
+            GLfloat mapCenter = SCENARIO_MAP_SIZE/2.0;
             gluLookAt(mapCenter,
-                SCENARIO_MAP_SIZE*2.0f,
+                SCENARIO_MAP_SIZE * 1.5,
                 mapCenter,
                 mapCenter,
                 -1.0,

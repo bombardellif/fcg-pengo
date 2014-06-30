@@ -34,10 +34,11 @@ void Penguin::draw()
 std::vector<double> Penguin::getEyesPosition()
 {
     std::vector<double> result;
+    std::pair<double, double> nextHalfStep = this->getNewPosition(0.1);
     
-    result.push_back(this->position.first);
-    result.push_back(1.75);
-    result.push_back(this->position.second);
+    result.push_back(nextHalfStep.first);
+    result.push_back(1.25);
+    result.push_back(nextHalfStep.second);
     
     return result;
 }
