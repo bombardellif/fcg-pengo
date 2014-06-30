@@ -10,7 +10,6 @@
       <itemPath>include/Conception.h</itemPath>
       <itemPath>include/DiscreteDirection.h</itemPath>
       <itemPath>include/Enemy.h</itemPath>
-      <itemPath>include/EnemyInteligence.h</itemPath>
       <itemPath>include/GameController.h</itemPath>
       <itemPath>include/Item.h</itemPath>
       <itemPath>include/LinearMovement.h</itemPath>
@@ -38,7 +37,6 @@
       <itemPath>src/Block.cpp</itemPath>
       <itemPath>src/Conception.cpp</itemPath>
       <itemPath>src/Enemy.cpp</itemPath>
-      <itemPath>src/EnemyInteligence.cpp</itemPath>
       <itemPath>src/GameController.cpp</itemPath>
       <itemPath>src/Item.cpp</itemPath>
       <itemPath>src/LinearMovement.cpp</itemPath>
