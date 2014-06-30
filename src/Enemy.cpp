@@ -103,6 +103,7 @@ Movement* Enemy::makeMovement(const Penguin& pengo)
         
         newMove->addObserver(this);
         this->inMovement = true;
+		this->movement = newMove;
     }
     
     return newMove;
@@ -168,4 +169,7 @@ void Enemy::makeMovementInMap(Movement* movement, double deltaMove)
 void Enemy::die()
 {
 	scenario.map[(int)position.second][(int)position.first] = NULL;
+	inMovement = false;
+	if (movement)
+		movement->ready = true;
 }

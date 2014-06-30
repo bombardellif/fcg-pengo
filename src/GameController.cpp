@@ -203,6 +203,13 @@ std::pair<double, double> GameController::translateMapToGL(std::pair<int, int> m
 void GameController::endMatch()
 {
 	penguin->die();
+	
+	glColor3f(1.0,1.0,1.0);
+	glRasterPos3f(2,1,1);
+	glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, 'B');
+	
+	std::cout << glutStrokeWidth(GLUT_STROKE_MONO_ROMAN, 'B') << std::endl;
+	
 	//delete penguin;
 	//penguin = NULL;
 	
@@ -212,11 +219,13 @@ void GameController::endMatch()
 void GameController::kill(Enemy* enemy)
 {
 	enemy->die();
-	//@TODO: Delete enemy, take it out from queue or whatever
+	
+	enemies.remove(enemy);
+	delete enemy;
 }
 
 void GameController::kill(Item* item)
 {
 	item->die();
-	//@TODO: Delete enemy, take it out from queue or whatever
+	delete item;			
 }

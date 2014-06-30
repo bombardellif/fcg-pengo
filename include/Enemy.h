@@ -15,6 +15,8 @@ class Enemy : public Movable, public Modelable, public Observer
 {
 private:
     bool inMovement;
+	
+	Movement* movement;
     
 public:
     Enemy(C3DObject* _model, std::pair<double, double> _position);
