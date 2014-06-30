@@ -25,12 +25,18 @@
 #define SLEEP_MS 30
 #define SLEEP_uS SLEEP_MS * 1000
 #define GO_FORWARD_KEY 'w'
+#define GO_FORWARD_KEY_U 'W'
 #define GO_BACKWARDS_KEY 's'
+#define GO_BACKWARDS_KEY_U 'S'
 #define TURN_CLOCKWISE_KEY 'd'
+#define TURN_CLOCKWISE_KEY_U 'D'
 #define TURN_COUNTERCLOCKWISE_KEY 'a'
+#define TURN_COUNTERCLOCKWISE_KEY_U 'A'
 #define PUSH_KEY ' '
 #define CREATE_BLOCK_KEY 'e'
+#define CREATE_BLOCK_KEY_U 'E'
 #define CHANGE_CAMERA_KEY 'v'
+#define CHANGE_CAMERA_KEY_U 'V'
 
 
 using namespace std;
@@ -66,7 +72,12 @@ void onWindowReshape(int x, int y) {
     
 	scenario.updateWindow(windowWidth, windowWidth);
     
-    glViewport(0, 0, windowWidth, windowHeight);
+    glScissor(windowWidth - windowWidth*0.2,
+            windowHeight - windowHeight*0.2,
+            windowWidth*0.2,
+            windowHeight*0.2);
+    
+    //glViewport(0, 0, windowWidth, windowHeight);
 }
 
 /**
@@ -74,25 +85,25 @@ void onWindowReshape(int x, int y) {
 */
 void onKeyDown(unsigned char key, int x, int y) {
 	switch (key) {
-		case GO_FORWARD_KEY:
+		case GO_FORWARD_KEY:case GO_FORWARD_KEY_U:
 			gameController.goForwardPressed = true;
 		break;
-		case GO_BACKWARDS_KEY:
+		case GO_BACKWARDS_KEY:case GO_BACKWARDS_KEY_U:
 			gameController.goBackwardsPressed = true;
 		break;
-		case TURN_CLOCKWISE_KEY:
+		case TURN_CLOCKWISE_KEY:case TURN_CLOCKWISE_KEY_U:
 			gameController.turnClockwisePressed = true;
 		break;
-		case TURN_COUNTERCLOCKWISE_KEY:
+		case TURN_COUNTERCLOCKWISE_KEY:case TURN_COUNTERCLOCKWISE_KEY_U:
 			gameController.turnCounterClockwisePressed = true;
 		break;
 		case PUSH_KEY:
 			gameController.pushPressed = true;
 		break;
-		case CREATE_BLOCK_KEY:
+		case CREATE_BLOCK_KEY:case CREATE_BLOCK_KEY_U:
 			gameController.createnewBlockPressed = true;
 		break;
-		case CHANGE_CAMERA_KEY:
+		case CHANGE_CAMERA_KEY:case CHANGE_CAMERA_KEY_U:
 			gameController.changeCameraPressed = true;
 		break;
 	}
@@ -103,25 +114,25 @@ void onKeyDown(unsigned char key, int x, int y) {
 */
 void onKeyUp(unsigned char key, int x, int y) {
 	switch (key) {
-		case GO_FORWARD_KEY:
+		case GO_FORWARD_KEY:case GO_FORWARD_KEY_U:
 			gameController.goForwardPressed = false;
 		break;
-		case GO_BACKWARDS_KEY:
+		case GO_BACKWARDS_KEY:case GO_BACKWARDS_KEY_U:
 			gameController.goBackwardsPressed = false;
 		break;
-		case TURN_CLOCKWISE_KEY:
+		case TURN_CLOCKWISE_KEY:case TURN_CLOCKWISE_KEY_U:
 			gameController.turnClockwisePressed = false;
 		break;
-		case TURN_COUNTERCLOCKWISE_KEY:
+		case TURN_COUNTERCLOCKWISE_KEY:case TURN_COUNTERCLOCKWISE_KEY_U:
 			gameController.turnCounterClockwisePressed = false;
 		break;
 		case PUSH_KEY:
 			gameController.pushPressed = false;
 		break;
-		case CREATE_BLOCK_KEY:
+		case CREATE_BLOCK_KEY:case CREATE_BLOCK_KEY_U:
 			gameController.createnewBlockPressed = false;
 		break;
-		case CHANGE_CAMERA_KEY:
+		case CHANGE_CAMERA_KEY:case CHANGE_CAMERA_KEY_U:
 			gameController.changeCameraPressed = false;
 		break;
 	}	
@@ -165,12 +176,8 @@ Initialize
 */
 void mainInit() {
     
-    scenario.updateWindow(windowWidth, windowWidth);
+    //scenario.updateWindow(windowWidth, windowWidth);
     //glViewport(0, 0, windowWidth, windowHeight);
-    glScissor(windowWidth - windowWidth*0.2,
-            windowHeight - windowHeight*0.2,
-            windowWidth*0.2,
-            windowHeight*0.2);
     
     scenario.init();
     gameController.init();

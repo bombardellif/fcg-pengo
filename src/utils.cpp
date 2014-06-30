@@ -12,11 +12,12 @@ std::pair<double, double> makeVector2(const std::pair<double,double> &from, cons
     return std::pair<double, double>(to.first - from.first, to.second - from.second);
 }
 
-template <class T1, class T2>
+template <typename T1, typename T2>
     double operator* (const std::pair<T1,T2>& lhs, const std::pair<T1,T2>& rhs)
 {
     return lhs.first * rhs.first + lhs.second * rhs.second;
 }
+template double operator*<double, double>(std::pair<double, double> const&, std::pair<double, double> const&);
 
 template <class T1, class T2>
     std::pair<T1,T2> operator- (const std::pair<T1,T2>& lhs, const std::pair<T1,T2>& rhs)

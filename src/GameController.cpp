@@ -30,18 +30,18 @@ penguin(NULL)
 
 void GameController::init()
 {
+    std::srand(std::time(NULL));
+    
+    // Place the enemies and Pengo all over the free spaces
     std::vector< std::pair<int,int> > freePositions = scenario.getFreeMapPositions();
     int size = freePositions.size();
     
     if (size < GAMECONTROLLER_MIN_ENEMIES + 1) {
-        throw std::string("Mapa não permite ciração dos elementos do jogo");
+        throw std::string("Mapa não permite criação dos elementos do jogo");
     }
-    
-    std::srand(std::time(NULL));
     int randomPosition;
-    
     for (int i=0; i<GAMECONTROLLER_MIN_ENEMIES + 1; i++) {
-        randomPosition = rand() % size;
+        randomPosition = std::rand() % size;
         
         std::pair<int,int> &newPosition = freePositions[randomPosition];
         
@@ -53,6 +53,25 @@ void GameController::init()
         
         size--;
         freePositions.erase(freePositions.begin() + randomPosition);
+    }
+    
+    // Place the items inside random moblie blocks
+    std::vector< std::pair<int,int> > mobileBlocksPos = scenario.getMobileBlockPositions();
+    int sizeBlocks = mobileBlocksPos.size();
+    
+    if (sizeBlocks < GAMECONTROLLER_MIN_ITEMS) {
+        throw std::string("Mapa não permite criação dos itens nos blocos");
+    }
+    for (int i=0; i<GAMECONTROLLER_MIN_ITEMS; i++) {
+        randomPosition = std::rand() % sizeBlocks;
+        
+        std::pair<int,int> chosenBlockPos = mobileBlocksPos[randomPosition];
+        
+        std::cout << chosenBlockPos.first << chosenBlockPos.second <<std::endl;
+        scenario.createItemInsideBlockAt(chosenBlockPos.first, chosenBlockPos.second);
+        
+        size--;
+        mobileBlocksPos.erase(mobileBlocksPos.begin() + randomPosition);
     }
 }
 
