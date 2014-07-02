@@ -218,7 +218,9 @@ void GameController::interpretBlockableCommand(){
 		//Create new Block
 		if(createnewBlockPressed){
 			std::pair<int, int> nextPosition = penguin->getNewPosition<int>(1);
-			if (scenario.conceptions.size() < maxConceivingBlocks)
+			if (scenario.conceptions.size() < maxConceivingBlocks
+				&& !scenario.outOfMap(nextPosition)
+				&& scenario.map[nextPosition.second][nextPosition.first] == NULL)
 				scenario.createConceptionAt(nextPosition.second, nextPosition.first, GAMECONTROLLER_NUM_STEPS_CONCEPTION);
 		}
 }
