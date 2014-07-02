@@ -115,7 +115,7 @@ bool LoadUncompressedTGA(Texture * texture, char * filename, FILE * fTGA)	// Loa
 	}
 
 	// Byte Swapping Optimized By Steve Thomas -> DOES NOT WORK! Ignores the RED value in the textures
-	for(GLuint cswap = 0; cswap < (int)tga.imageSize; cswap += tga.bytesPerPixel)
+	for(GLuint cswap = 0; cswap < (GLuint)tga.imageSize; cswap += tga.bytesPerPixel)
 	{
 	    // Working! Modified by Lynek - May 2014
 	    texture->imageData[cswap] ^= texture->imageData[cswap+2];

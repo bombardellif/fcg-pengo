@@ -147,7 +147,7 @@ void Scenario::renderFloor()
     //glTranslatef(-(float)planeSize/2.0f, 0.0f, -(float)planeSize/2.0f);
 
     glColor4f(1.0f,1.0f,1.0f,1.0f);
-    int xQuads = SCENARIO_MAP_SIZE * SCENARIO_MAP_SIZE;
+//    int xQuads = SCENARIO_MAP_SIZE * SCENARIO_MAP_SIZE;
 //    for (int i = 0; i < xQuads; i++) {
 //        for (int j = 0; j < xQuads; j++) {
             glBegin(GL_QUADS);

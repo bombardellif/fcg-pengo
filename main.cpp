@@ -22,7 +22,7 @@
 #include <iostream>
 
 #define APP_NAME "FCG - Pengo"
-#define SLEEP_MS 30
+#define SLEEP_MS 15
 #define SLEEP_uS SLEEP_MS * 1000
 #define GO_FORWARD_KEY 'w'
 #define GO_FORWARD_KEY_U 'W'

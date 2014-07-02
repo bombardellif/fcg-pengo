@@ -10,6 +10,7 @@
 #include "Scenario.h"
 #include "Block.h"
 #include "Conception.h"
+#include "utils.h"
 #include <iostream>
 
 extern Scenario scenario;
@@ -24,7 +25,7 @@ gameState(GAMECONTROLLER_STATE_PLAYING)
 
 GameController::GameController():
 penguinSpeed(GAMECONTROLLER_DEFAULT_PENGUIN_SPEED),
-maxConceivingBlocks(GAMECONTROLLER_DEFAULT_MAX_CONCEIVING_BLOCKS),		
+maxConceivingBlocks(GAMECONTROLLER_DEFAULT_MAX_CONCEIVING_BLOCKS),
 penguin(NULL),
 gameState(GAMECONTROLLER_STATE_PLAYING)
 {
